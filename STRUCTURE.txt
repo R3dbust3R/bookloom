@@ -1,0 +1,46 @@
+GENDER:
+    - name
+
+USER:
+    - id
+    - name
+    - username
+    - email 
+    - password 
+    - gender_id
+    - birth_date 
+    - bio 
+    - profile_image 
+    - profile_banner 
+    - website
+    - last_login
+
+LANGUAGE:
+    - name
+
+GENRE:
+    - name
+
+BOOK:
+    - title
+    - description
+    - author
+    - language_id
+    - genre_id
+    - book_url
+    - page_count
+    - publisher
+    - cover
+    - views
+    - downloaded_times
+
+REVIEW:
+    - user_id
+    - book_id
+    - rating
+    - review
+
+COMMENT:
+    - comment
+    - user_id
+    - book_id
