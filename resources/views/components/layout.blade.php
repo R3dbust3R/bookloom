@@ -26,12 +26,16 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
 
             <div class="navbar-nav">
-                <li class="nav-item"><button id="search-btn" class="btn bg-white rounded-circle"><i class="fa-solid fa-magnifying-glass"></i></button></li>
-                <li class="nav-item"><a href="{{ route('review.index') }}" class="btn btn-warning rounded-pill px-4 mx-2">Reviews</a></li>
-                <li class="nav-item"><a href="{{ route('book.index') }}" class="nav-link mx-2">Books</a></li>
-                <li class="nav-item"><a href="{{ route('home.about') }}" class="nav-link mx-2">About us</a></li>
+
+                @auth
+                    <li class="nav-item"><button id="search-btn" class="btn bg-white rounded-circle"><i class="fa-solid fa-magnifying-glass"></i></button></li>
+                    <li class="nav-item"><a href="{{ route('review.index') }}" class="btn btn-warning rounded-pill px-4 mx-2">Reviews</a></li>
+                    <li class="nav-item"><a href="{{ route('book.index') }}" class="nav-link mx-2">Books</a></li>
+                @endauth
+
                 
                 @guest
+                    <li class="nav-item"><a href="{{ route('home.about') }}" class="nav-link mx-2">About us</a></li>
                     <li class="nav-item"><a href="{{ route('login.form') }}" class="nav-link btn bg-white rounded-pill px-4 mx-2">Login</a></li>
                 @endguest
                 
@@ -73,10 +77,10 @@
                     <h4>Quick Links</h4>
                     <ul class="list-unstyled fw-light">
                         <li><a href="{{ route('home.about') }}" class="text-light">About us</a></li>
-                        <li><a href="{{ route('book.index') }}" class="text-light">Books</a></li>
-                        <li><a href="{{ route('review.index') }}" class="text-light">Reviews</a></li>
-
+                        
                         @auth
+                            <li><a href="{{ route('book.index') }}" class="text-light">Books</a></li>
+                            <li><a href="{{ route('review.index') }}" class="text-light">Reviews</a></li>
                             <li><a href="{{ route('user.profile') }}" class="text-light">Profile</a></li>
                             <li><a href="#" class="text-light">Settings</a></li>
                         @endauth

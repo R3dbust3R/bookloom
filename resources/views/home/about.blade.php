@@ -1,27 +1,7 @@
 <x-layout>
 
 {{-- header --}}
-<header class="main-header bg-light py-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="sub-containwer mt-5">
-                    <h1 class="header-title"><span class="text-warning fw-bold">BookLoom</span> Reviews and tips for books</h1>
-                    <p class="lead">Discover reviews of books from different readers from all over the world</p>
-                    <a href="#" class="btn btn-warning px-4 py-2 rounded-pill">Explore reviews and tips</a>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="img">
-                    <img 
-                        src="https://cdni.iconscout.com/illustration/premium/thumb/open-book-5514317-4603564.png" 
-                        alt="header image" 
-                        class="w-100 img-fuild">
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
+<x-header></x-header>
 {{-- header --}}
 
 {{-- about us --}}
