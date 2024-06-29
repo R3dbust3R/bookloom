@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Language;
 use App\Models\Genre;
 use App\Models\Comment;
+use App\Models\Review;
 
 class Book extends Model
 {
@@ -27,6 +28,10 @@ class Book extends Model
 
     public function genre() {
         return $this->belongsTo(Genre::class);
+    }
+
+    public function reviews() {
+        return $this->hasMany(Review::class);
     }
 
     

@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Book;
-use App\Models\Genre;
+use App\Models\Review;
 use Illuminate\Http\Request;
 
-class GenreController extends Controller
+class ReviewController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $reviews = Review::with(['user', 'book'])->paginate(12);
+        return view('review.index', compact('reviews'));
     }
 
     /**
@@ -35,16 +35,15 @@ class GenreController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Genre $genre)
+    public function show(Review $review)
     {
-        $books = Book::where('genre_id', $genre->id)->paginate(12);
-        return view('genre.show', compact('genre', 'books'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Genre $genre)
+    public function edit(Review $review)
     {
         //
     }
@@ -52,7 +51,7 @@ class GenreController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Genre $genre)
+    public function update(Request $request, Review $review)
     {
         //
     }
@@ -60,7 +59,7 @@ class GenreController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Genre $genre)
+    public function destroy(Review $review)
     {
         //
     }

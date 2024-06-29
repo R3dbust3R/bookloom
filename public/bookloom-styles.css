@@ -34,4 +34,42 @@ a {
 }
 .section-title:hover:before {
   width: 160px;
+}
+
+.search-form {
+  position: fixed;
+  z-index: 9;
+  width: 100%;
+  height: 100%;
+  top: -100%;
+  opacity: 0;
+  transform: scaleY(0);
+  left: 0;
+  transition: all 0.75s ease;
+}
+.search-form.show {
+  top: 0;
+  opacity: 1;
+  transform: scaleY(1);
+}
+.search-form > .overlay-close {
+  background-color: rgba(0, 0, 0, 0.6);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+.search-form > form {
+  position: absolute;
+  width: 680px;
+  max-width: 100%;
+  left: calc(50% - 340px);
+  top: calc(50% - 80px);
+}
+.search-form > form input.form-control {
+  border-radius: 25px 0 0 25px;
+}
+.search-form > form input.btn {
+  border-radius: 0 25px 25px 0;
 }/*# sourceMappingURL=bookloom-styles.css.map */

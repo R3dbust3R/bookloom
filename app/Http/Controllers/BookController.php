@@ -12,7 +12,8 @@ class BookController extends Controller
      */
     public function index()
     {
-        //
+        $books = Book::with(['user', 'language', 'genre', 'comments'])->paginate(12);
+        return view('book.index', compact('books'));
     }
 
     /**
@@ -64,11 +65,11 @@ class BookController extends Controller
     }
 
     public function read(Book $book) {
-        return 'read this book: ' . $book->title;
+        return view('book.read', compact('book'));
     }
 
-    public function download(Book $book) {
-        return 'download this book: ' . $book->title;
-    }
+    // public function download(Book $book) {
+    //     return 'download this book: ' . $book->title;
+    // }
 
 }

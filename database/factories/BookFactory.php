@@ -17,7 +17,7 @@ class BookFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => fake()->title(),
+            'title' => fake()->text(80),
             'description' => fake()->text(350),
             'author' => fake()->name(),
             'language_id' => rand(1, 3),

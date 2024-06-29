@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Book;
 use App\Models\Comment;
+use App\Models\Review;
 
 
 class User extends Authenticatable
@@ -54,5 +55,9 @@ class User extends Authenticatable
 
     public function comments() {
         return $this->hasMany(Comment::class);
+    }
+
+    public function reviews() {
+        return $this->hasMany(Review::class);
     }
 }

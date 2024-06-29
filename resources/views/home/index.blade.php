@@ -7,8 +7,9 @@
             <div class="col-md-6">
                 <div class="sub-containwer mt-5">
                     <h1 class="header-title"><span class="text-warning fw-bold">BookLoom</span> Reviews and tips for books</h1>
-                    <p class="lead">Discover reviews of books from different readers from all over the world</p>
-                    <a href="#" class="btn btn-warning px-4 py-2 rounded-pill">Explore reviews and tips</a>
+                    <p class="lead my-4">Discover reviews of books from different readers from all over the world</p>
+                    <a href="{{ route('review.index') }}" class="btn btn-outline-dark px-5 py-3 rounded-pill"><i class="fa-solid fa-magnifying-glass"></i> Explore Books Reviews</a>
+                    <a href="#" class="btn btn-warning px-5 py-3 rounded-pill"><i class="fa-solid fa-plus"></i> Create Account</a>
                 </div>
             </div>
             <div class="col-md-6">
@@ -42,24 +43,30 @@
 {{-- latest books --}}
 
 
-{{-- books genres --}}
+{{-- genres --}}
 <section class="latest-books bg-light py-5">
     <div class="container">
-        <h2 class="section-title text-capitalize mb-4">Discover popular genres</h2>
+        <h2 class="section-title text-capitalize mb-4">Discover popular categories</h2>
         <div class="row">
-            @for ($i = 0; $i < 4; $i++)
 
+            @foreach ($genres as $genre)
+            
                 <div class="col-md-6">
-                    <div class="genre bg-white p-5 mb-4">
-                        <h4 class="text-capitalize genre m-01">genre</h4>
+                    <div class="genre bg-white mb-4">
+                        <h4 class="text-capitalize genre m-0">
+                            <a href="{{ route('genre.show', $genre) }}" class="d-block w-100 p-5">
+                                {{ $genre->name }} {{ $genre->books->count() }}
+                            </a>
+                        </h4>
                     </div>
                 </div>
+                
+            @endforeach
 
-            @endfor
         </div>
     </div>
 </section>
-{{-- books genres --}}
+{{-- genres --}}
 
 {{-- random quote --}}
 <section class="latest-books py-5">
@@ -68,8 +75,10 @@
             <div class="icon mb-4">
                 <i class="fa-solid fa-quote-left fs-1"></i>
             </div>
-            <p class="lead fs-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis quisquam autem iusto consequuntur modi, saepe facilis impedit explicabo rem itaque minus corrupti dolorem tempora deserunt possimus earum placeat, reiciendis adipisci? Sit qui quas sapiente inventore!</p>
-            <div class="owner fs-4"><i class="fa-solid fa-minus"></i> Jack Watson</div>
+            <p class="lead fs-4">
+                Books are the perfect entertainment: no commercials, no batteries, hours of enjoyment for each dollar spent. What I wonder is why everybody doesn't carry a book around for those inevitable dead spots in life.
+            </p>
+            <div class="owner fs-4"><i class="fa-solid fa-minus"></i> Stephen King</div>
         </div>
     </div>
 </section>

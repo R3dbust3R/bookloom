@@ -33,3 +33,44 @@ a {
     }
 }
 // global
+
+
+// search-form
+.search-form {
+    position: fixed;
+    z-index: 9;
+    width: 100%;
+    height: 100%;
+    top: -100%;
+    opacity: 0;
+    transform: scaleY(0);
+    left: 0;
+    transition: all .75s ease;
+    &.show {
+        top: 0;
+        opacity: 1;
+        transform: scaleY(1);
+    }
+    & > .overlay-close {
+        background-color: #0009;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+    }
+    & > form {
+        position: absolute;
+        width: 680px;
+        max-width: 100%;
+        left: calc(50% - (680px / 2));
+        top: calc(50% - 80px);
+        input.form-control {
+            border-radius: 25px 0 0 25px;
+        }
+        input.btn {
+            border-radius: 0 25px 25px 0;
+        }
+    }
+}
+// search-form

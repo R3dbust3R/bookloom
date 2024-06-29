@@ -26,20 +26,28 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
 
             <div class="navbar-nav">
-                <li class="nav-item"><span class="btn bg-white rounded-circle"><i class="fa-solid fa-magnifying-glass"></i></span></li>
-                <li class="nav-item"><a href="#" class="nav-link mx-2">Reviews</a></li>
+                <li class="nav-item"><button id="search-btn" class="btn bg-white rounded-circle"><i class="fa-solid fa-magnifying-glass"></i></button></li>
+                <li class="nav-item"><a href="{{ route('review.index') }}" class="nav-link mx-2">Reviews</a></li>
+                <li class="nav-item"><a href="{{ route('book.index') }}" class="nav-link mx-2">Books</a></li>
                 <li class="nav-item"><a href="{{ route('home.about') }}" class="nav-link mx-2">About us</a></li>
                 <li class="nav-item"><a href="#" class="btn btn-warning px-4 rounded-pill mx-2"><i class="fa-regular fa-pen-to-square"></i> Write a review</a></li>
-                <li class="nav-item"><a href="#" class="nav-link bg-white rounded-circle px-3 mx-2"><i class="fa-regular fa-user"></i></a></li>
+                <li class="nav-item"><a href="{{ route('user.profile') }}" class="nav-link bg-white rounded-circle px-3 mx-2"><i class="fa-regular fa-user"></i></a></li>
             </div>
 
           </div>
         </div>
     </nav>
     {{-- navbar --}}
-    
-    {{ $slot }}
 
+    {{-- search form --}}
+    <x-search-form></x-search-form>
+    {{-- search form --}}
+
+    {{-- page content --}}
+    {{ $slot }}
+    {{-- page content --}}
+
+    {{-- footer --}}
     <footer class="footer bg-dark text-light py-5">
         <div class="container pt-4">
             <div class="row">
@@ -57,9 +65,9 @@
                     <h4>Quick Links</h4>
                     <ul class="list-unstyled fw-light">
                         <li><a href="{{ route('home.about') }}" class="text-light">About us</a></li>
-                        <li><a href="#" class="text-light">Books</a></li>
-                        <li><a href="#" class="text-light">Reviews</a></li>
-                        <li><a href="#" class="text-light">Profile</a></li>
+                        <li><a href="{{ route('book.index') }}" class="text-light">Books</a></li>
+                        <li><a href="{{ route('review.index') }}" class="text-light">Reviews</a></li>
+                        <li><a href="{{ route('user.profile') }}" class="text-light">Profile</a></li>
                         <li><a href="#" class="text-light">Settings</a></li>
                     </ul>
                 </div>
@@ -67,16 +75,18 @@
                 <div class="col-sm-6 col-md-3">
                     <h4>Useful Links</h4>
                     <ul class="list-unstyled fw-light">
-                        <li><a href="#" class="text-light">Terms and conditions</a></li>
-                        <li><a href="#" class="text-light">Privacy policy</a></li>
+                        <li><a href="{{ route('home.terms-and-conditions') }}" class="text-light">Terms and conditions</a></li>
+                        <li><a href="{{ route('home.privacy-policy') }}" class="text-light">Privacy policy</a></li>
                     </ul>
                 </div>
 
             </div>
         </div>
     </footer>
+    {{-- footer --}}
 
     <script src="https://kit.fontawesome.com/33189c9c9d.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+    <script src="bookloom.js"></script>
 </body>
 </html>
