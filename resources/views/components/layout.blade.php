@@ -27,11 +27,19 @@
 
             <div class="navbar-nav">
                 <li class="nav-item"><button id="search-btn" class="btn bg-white rounded-circle"><i class="fa-solid fa-magnifying-glass"></i></button></li>
-                <li class="nav-item"><a href="{{ route('review.index') }}" class="nav-link mx-2">Reviews</a></li>
+                <li class="nav-item"><a href="{{ route('review.index') }}" class="btn btn-warning rounded-pill px-4 mx-2">Reviews</a></li>
                 <li class="nav-item"><a href="{{ route('book.index') }}" class="nav-link mx-2">Books</a></li>
                 <li class="nav-item"><a href="{{ route('home.about') }}" class="nav-link mx-2">About us</a></li>
-                <li class="nav-item"><a href="#" class="btn btn-warning px-4 rounded-pill mx-2"><i class="fa-regular fa-pen-to-square"></i> Write a review</a></li>
-                <li class="nav-item"><a href="{{ route('user.profile') }}" class="nav-link bg-white rounded-circle px-3 mx-2"><i class="fa-regular fa-user"></i></a></li>
+                
+                @guest
+                    <li class="nav-item"><a href="{{ route('login.form') }}" class="nav-link btn bg-white rounded-pill px-4 mx-2">Login</a></li>
+                @endguest
+                
+                @auth
+                    <li class="nav-item"><a href="{{ route('book.create') }}" class="nav-link bg-white rounded-circle px-3 mx-2"><i class="fa-regular fa-plus"></i></a></li>
+                    <li class="nav-item"><a href="{{ route('user.profile') }}" class="nav-link bg-white rounded-circle px-3 mx-2"><i class="fa-regular fa-user"></i></a></li>
+                    <li class="nav-item"><a href="{{ route('auth.logout') }}" class="nav-link mx-2">Logout</a></li>
+                @endauth
             </div>
 
           </div>
@@ -67,8 +75,11 @@
                         <li><a href="{{ route('home.about') }}" class="text-light">About us</a></li>
                         <li><a href="{{ route('book.index') }}" class="text-light">Books</a></li>
                         <li><a href="{{ route('review.index') }}" class="text-light">Reviews</a></li>
-                        <li><a href="{{ route('user.profile') }}" class="text-light">Profile</a></li>
-                        <li><a href="#" class="text-light">Settings</a></li>
+
+                        @auth
+                            <li><a href="{{ route('user.profile') }}" class="text-light">Profile</a></li>
+                            <li><a href="#" class="text-light">Settings</a></li>
+                        @endauth
                     </ul>
                 </div>
 

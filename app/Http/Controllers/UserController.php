@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Book;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -16,7 +17,8 @@ class UserController extends Controller
     }
 
     public function profile() {
-        return view('user.profile');
+        $books = Book::with(['user', 'language', 'genre', 'comments', 'reviews'])->paginate(12);
+        return view('user.profile', compact('books'));
     }
 
     /**

@@ -74,3 +74,21 @@ a {
     }
 }
 // search-form
+
+
+// profile
+.profile-header {
+    .profile-banner {
+        height: 400px;
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
+    .profile-img {
+        width: 160px;
+    }
+    .profile-img-container {
+        top: -80px;
+    }
+}
+// profile

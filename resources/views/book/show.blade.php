@@ -33,6 +33,15 @@
                     <a href="{{ route('book.read', $book) }}" class="btn btn-primary px-4 rounded-pill"><i class="fa-brands fa-readme"></i> Read book</a>
                     <a href="{{ asset('storage/books/books/' . $book->book_url) }}" target="_blank" class="btn btn-primary px-4 rounded-pill"><i class="fa-solid fa-cloud-arrow-down"></i> Download book</a>
                 </div>
+                
+                @auth 
+                    @if (Auth::user()->id == $book->user_id)
+                        <div class="btns bg-light mb-4 px-5 pb-3">
+                            <a href="#" class="btn btn-success px-4 rounded-pill"><i class="fa-solid fa-edit"></i> Edit book</a>
+                            <a href="#" class="btn btn-danger  px-4 rounded-pill"><i class="fa-solid fa-trash"></i> Delete book</a>
+                        </div>
+                    @endif
+                @endauth
             </div>
 
         </div>

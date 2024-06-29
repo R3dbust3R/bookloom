@@ -72,4 +72,17 @@ a {
 }
 .search-form > form input.btn {
   border-radius: 0 25px 25px 0;
+}
+
+.profile-header .profile-banner {
+  height: 400px;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+.profile-header .profile-img {
+  width: 160px;
+}
+.profile-header .profile-img-container {
+  top: -80px;
 }/*# sourceMappingURL=bookloom-styles.css.map */

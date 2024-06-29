@@ -14,6 +14,19 @@ class Book extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'title', 
+        'description', 
+        'author', 
+        'language_id', 
+        'genre_id',
+        'user_id',
+        'page_count', 
+        'book_url', 
+        'cover', 
+        'views'
+    ];
+
     public function comments() {
         return $this->hasMany(Comment::class);
     }

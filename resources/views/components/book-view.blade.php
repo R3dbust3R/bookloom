@@ -1,4 +1,4 @@
-@props(['book'])
+@props(['book', 'is_owner' => false])
 
 <div class="book-container bg-light mb-4">
     <a href="{{ route('book.show', $book) }}">
@@ -30,7 +30,13 @@
             {{-- <span class="d-block text-muted">Viewed: {{ $book->views }}</span> --}}
             <span class="d-block text-muted">Downloaded: {{ $book->downloaded_times }} times</span>
         </div>
-        <a href="{{ route('book.read', $book) }}" class="btn btn-warning btn-sm rounded-pill px-4"><i class="fa-solid fa-book-open-reader"></i></a>
-        <a href="{{ asset('storage/books/books/' . $book->book_url ) }}" download="{{ asset('storage/books/books/' . $book->book_url ) }}" class="btn btn-dark btn-sm rounded-pill px-4"><i class="fa-solid fa-download"></i></a>
+        <a href="{{ route('book.read', $book) }}" class="btn btn-warning btn-sm rounded-pill px-4 mb-1"><i class="fa-solid fa-book-open-reader"></i></a>
+        <a href="{{ asset('storage/books/books/' . $book->book_url ) }}" download="{{ asset('storage/books/books/' . $book->book_url ) }}" class="btn btn-dark btn-sm rounded-pill px-4 mb-1"><i class="fa-solid fa-download"></i></a>
+
+        @if ($is_owner)
+            <a href="#" class="btn btn-primary btn-sm rounded-pill px-4 mb-1"><i class="fa-solid fa-edit"></i></a>
+            <a href="#" class="btn btn-danger btn-sm rounded-pill px-4 mb-1"><i class="fa-solid fa-trash"></i></a>
+        @endif
+
     </div>
 </div>

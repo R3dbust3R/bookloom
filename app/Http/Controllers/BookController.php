@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Genre;
+use App\Models\Language;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
 {
@@ -21,7 +24,9 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+        $languages = Language::all();
+        $genres = Genre::all();
+        return view('book.create', compact('languages', 'genres'));
     }
 
     /**
@@ -29,7 +34,40 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'title'         => ['required', 'string', 'min:3', 'max:255'],
+            'description'   => ['required', 'string', 'min:100', 'max:5000'],
+            'author'        => ['required', 'string', 'min:3', 'max:255'],
+            'language_id'   => ['nullable'],
+            'genre_id'      => ['nullable'],
+            'page_count'    => ['nullable', 'integer', 'max:20000'],
+            'cover'         => ['nullable', 'image', 'mimes:jpeg,jpg,png,avif,webp', 'max:5120'],
+            'book_url'      => ['required', 'file', 'mimes:pdf', 'max:20480'],
+        ]);
+
+        
+        $validated['language_id'] = in_array($request->input('language_id'), [1,2,3]) ? $request->input('language_id') : 2;
+        $validated['genre_id'] = in_array($request->input('genre_id'), [1,2,3,4,5]) ? $request->input('genre_id') : 1;
+
+        $validated['user_id'] = Auth::user()->id;
+
+        $book_url = $request->file('book_url')->store('books/books', 'public');
+
+        $validated['book_url'] = $book_url;
+
+        if ($request->hasFile('cover')) {
+            $cover = $request->file('cover')->store('books', 'public');
+            $validated['cover'] = $cover;
+        }
+
+        $book = New Book( $validated );
+
+        if ($book->save()) {
+            return redirect()->back()->with('success', 'Your book has been upload successuly!');
+        } 
+
+        return redirect()->back()->with('error', 'There was an error while trying to upload your book, try again later');
+        
     }
 
     /**

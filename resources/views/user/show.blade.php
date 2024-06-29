@@ -9,7 +9,8 @@
             <img 
             src="{{ asset($user->profile_image ? 'storage/' . $user->profile_image : 'storage/users/default.png') }}" 
             alt="{{ $user->name }}'s profile image"
-            class="profile-img d-block m-auto rounded-circle border">
+            class="profile-img d-block m-auto rounded-circle border"
+            style="width: 140px">
             <h4 class="my-2"> {{ $user->name }} </h4>
             <span class="text-muted"> <i class="fa-regular fa-calendar-days"></i> Member: {{ $user->created_at->DiffForHumans() }} </span>
         </div>
