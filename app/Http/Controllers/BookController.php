@@ -132,7 +132,20 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        return 'destroy book page';
+
+        if ($book->delete()) {
+
+            Storage::disk('public')->delete($book->book_url);
+            
+            if ($book->cover) {
+                Storage::disk('public')->delete($book->cover);
+            }
+            
+            return redirect()->route('user.profile')->with('success', $book->title . ' has been deleted successfuly!');
+        }
+
+        abort(403, 'No such media to delete');
+
     }
 
     public function read(Book $book) {
