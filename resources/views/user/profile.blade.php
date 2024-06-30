@@ -5,6 +5,20 @@
 <header class="profile-header bg-light">
     <div class="container">
 
+        {{-- alert messages --}}
+        @session('success')
+            <div class="alert alert-success">
+                <i class="fa-regular fa-circle-check"></i> {{ session('success') }}
+            </div>
+        @endsession
+
+        @session('error')
+            <div class="alert alert-danger">
+                <i class="fa-solid fa-triangle-exclamation"></i> {{ session('error') }}
+            </div>
+        @endsession
+        {{-- alert messages --}}
+
         <div 
             class="profile-banner text-center rounded-4" 
             style="background-image: url({{ asset('storage/' . (Auth::user()->profile_banner ? Auth::user()->profile_banner : 'users/bananers/default.png')) }})">
@@ -16,10 +30,12 @@
             alt="profile image"
             class="profile-img rounded-circle border img-thumbnail d-block m-auto">
             
-            <h4 class="my-2">
+            <h4 class="text-capitalize my-2">
+                <a href="{{ route('user.edit') }}" class="btn btn-warning rounded-circle border edit-icon position-absolute"><i class="fa-solid fa-pen"></i></a>
                 {{ Auth::user()->name }}
             </h4>
             <span class="text-muted"> <i class="fa-regular fa-calendar-days"></i> Member: {{ Auth::user()->created_at->DiffForHumans() }} </span>
+
         </div>
 
     </div>

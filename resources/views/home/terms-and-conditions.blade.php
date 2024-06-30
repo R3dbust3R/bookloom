@@ -1,5 +1,11 @@
 <x-layout>
 
+
+{{-- header --}}
+<x-header></x-header>
+{{-- header --}}
+
+
 {{-- terms and conditions --}}
 <section class="latest-books py-5">
     <div class="container">

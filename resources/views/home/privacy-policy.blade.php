@@ -1,5 +1,9 @@
 <x-layout>
 
+{{-- header --}}
+<x-header></x-header>
+{{-- header --}}
+
 {{-- privacy policy --}}
 <section class="latest-books py-5">
     <div class="container">

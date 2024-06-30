@@ -32,6 +32,10 @@ a {
         width: 160px;
     }
 }
+.c-pointer {
+    cursor: pointer;
+    user-select: none;
+}
 // global
 
 
@@ -89,6 +93,11 @@ a {
     }
     .profile-img-container {
         top: -80px;
+    }
+    .edit-icon {
+        bottom: 90px;
+        right: calc(50% - 80px);
+        padding: 7px 10px;
     }
 }
 // profile

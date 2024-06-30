@@ -36,6 +36,13 @@ a {
   width: 160px;
 }
 
+.c-pointer {
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+
 .search-form {
   position: fixed;
   z-index: 9;
@@ -85,4 +92,9 @@ a {
 }
 .profile-header .profile-img-container {
   top: -80px;
+}
+.profile-header .edit-icon {
+  bottom: 90px;
+  right: calc(50% - 80px);
+  padding: 7px 10px;
 }/*# sourceMappingURL=bookloom-styles.css.map */
