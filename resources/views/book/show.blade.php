@@ -37,8 +37,16 @@
                 @auth 
                     @if (Auth::user()->id == $book->user_id)
                         <div class="btns bg-light mb-4 px-5 pb-3">
-                            <a href="#" class="btn btn-success px-4 rounded-pill"><i class="fa-solid fa-edit"></i> Edit book</a>
-                            <a href="#" class="btn btn-danger  px-4 rounded-pill"><i class="fa-solid fa-trash"></i> Delete book</a>
+                            <a href="{{ route('book.edit', $book) }}" class="btn btn-success px-4 rounded-pill"><i class="fa-solid fa-edit"></i> Edit book</a>
+                            <form 
+                                action="{{ route('book.destroy', $book) }}"
+                                method="POST"
+                                class="d-inline-block">
+                                @csrf
+                                @method('DELETE')
+                                
+                                <input type="submit" value="Delete Book" class="btn btn-danger px-4 rounded-pill">
+                            </form>
                         </div>
                     @endif
                 @endauth

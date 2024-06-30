@@ -7,6 +7,7 @@ use App\Models\Genre;
 use App\Models\Language;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
 {
@@ -83,7 +84,9 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
-        //
+        $languages = Language::all();
+        $genres = Genre::all();
+        return view('book.edit', compact('book', 'languages', 'genres'));
     }
 
     /**
@@ -91,7 +94,37 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book)
     {
-        //
+        $validated = $request->validate([
+            'title'         => ['required', 'string', 'min:3', 'max:255'],
+            'description'   => ['required', 'string', 'min:100', 'max:5000'],
+            'author'        => ['required', 'string', 'min:3', 'max:255'],
+            'language_id'   => ['nullable'],
+            'genre_id'      => ['nullable'],
+            'page_count'    => ['nullable', 'integer', 'max:20000'],
+            'cover'         => ['nullable', 'image', 'mimes:jpeg,jpg,png,avif,webp', 'max:5120'],
+        ]);
+
+        
+        $validated['language_id'] = in_array($request->input('language_id'), [1,2,3]) ? $request->input('language_id') : 2;
+        $validated['genre_id'] = in_array($request->input('genre_id'), [1,2,3,4,5]) ? $request->input('genre_id') : 1;
+
+        $validated['user_id'] = $book->user_id;
+        $validated['book_url'] = $book->book_url;
+
+        if ($request->hasFile('cover')) {
+            if ($book->cover) {
+                Storage::disk('public')->delete($book->cover);
+            }
+            $cover = $request->file('cover')->store('books', 'public');
+            $validated['cover'] = $cover;
+        }
+
+        if ($book->update( $validated )) {
+            return redirect()->back()->with('success', 'Your book has been updated successuly!');
+        } 
+
+        return redirect()->back()->with('error', 'There was an error while trying to update your book, try again later');
+        
     }
 
     /**
@@ -99,7 +132,7 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        //
+        return 'destroy book page';
     }
 
     public function read(Book $book) {

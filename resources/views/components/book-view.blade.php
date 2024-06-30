@@ -30,12 +30,16 @@
             {{-- <span class="d-block text-muted">Viewed: {{ $book->views }}</span> --}}
             <span class="d-block text-muted">Downloaded: {{ $book->downloaded_times }} times</span>
         </div>
-        <a href="{{ route('book.read', $book) }}" class="btn btn-warning btn-sm rounded-pill px-4 mb-1"><i class="fa-solid fa-book-open-reader"></i></a>
-        <a href="{{ asset('storage/books/books/' . $book->book_url ) }}" download="{{ asset('storage/books/books/' . $book->book_url ) }}" class="btn btn-dark btn-sm rounded-pill px-4 mb-1"><i class="fa-solid fa-download"></i></a>
+        <a href="{{ route('book.read', $book) }}" class="btn btn-warning btn-sm rounded-pill px-4 mb-1">Read</a>
+        <a href="{{ asset('storage/books/books/' . $book->book_url ) }}" download="{{ asset('storage/books/books/' . $book->book_url ) }}" class="btn btn-dark btn-sm rounded-pill px-4 mb-1">Download</a>
 
         @if ($is_owner)
-            <a href="#" class="btn btn-primary btn-sm rounded-pill px-4 mb-1"><i class="fa-solid fa-edit"></i></a>
-            <a href="#" class="btn btn-danger btn-sm rounded-pill px-4 mb-1"><i class="fa-solid fa-trash"></i></a>
+            <a href="{{ route('book.edit', $book) }}" class="btn btn-success btn-sm rounded-pill px-4 mb-1">Edit</a>
+            <form action="{{ route('book.destroy', $book) }}" method="POST" class="d-inline-block">
+                @csrf
+                @method('DELETE')
+                <input type="submit" value="Delete" class="btn btn-danger btn-sm rounded-pill px-4 mb-1">
+            </form>
         @endif
 
     </div>

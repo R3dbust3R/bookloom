@@ -28,21 +28,22 @@
             <div class="navbar-nav">
 
                 @auth
-                    <li class="nav-item"><button id="search-btn" class="btn bg-white rounded-circle"><i class="fa-solid fa-magnifying-glass"></i></button></li>
-                    <li class="nav-item"><a href="{{ route('review.index') }}" class="btn btn-warning rounded-pill px-4 mx-2">Reviews</a></li>
-                    <li class="nav-item"><a href="{{ route('book.index') }}" class="nav-link mx-2">Books</a></li>
+                <li class="nav-item"><a href="{{ route('review.index') }}" class="nav-link"><i class="fa-regular fa-star"></i> Reviews</a></li>
+                <li class="nav-item"><a href="{{ route('book.index') }}" class="nav-link"><i class="fa-solid fa-book"></i> Books</a></li>
+                <li class="nav-item"><button id="search-btn" class="btn bg-white rounded-circle"><i class="fa-solid fa-magnifying-glass"></i></button></li>
                 @endauth
 
                 
                 @guest
-                    <li class="nav-item"><a href="{{ route('home.about') }}" class="nav-link mx-2">About us</a></li>
-                    <li class="nav-item"><a href="{{ route('login.form') }}" class="nav-link btn bg-white rounded-pill px-4 mx-2">Login</a></li>
+                    <li class="nav-item"><a href="{{ route('home.about') }}" class="nav-link mx-2"><i class="fa-solid fa-users"></i> About us</a></li>
+                    <li class="nav-item"><a href="{{ route('login.form') }}" class="nav-link btn bg-white rounded-pill px-4 mx-1"><i class="fa-solid fa-arrow-right-to-bracket"></i> Login</a></li>
                 @endguest
                 
                 @auth
-                    <li class="nav-item"><a href="{{ route('book.create') }}" class="nav-link bg-white rounded-circle px-3 mx-2"><i class="fa-regular fa-plus"></i></a></li>
-                    <li class="nav-item"><a href="{{ route('user.profile') }}" class="nav-link bg-white rounded-circle px-3 mx-2"><i class="fa-regular fa-user"></i></a></li>
-                    <li class="nav-item"><a href="{{ route('auth.logout') }}" class="nav-link mx-2">Logout</a></li>
+                    <li class="nav-item"><a href="{{ route('book.create') }}" class="btn bg-white border rounded-pill px-3 mx-1"><i class="fa-regular fa-plus"></i> Upload eBook</a></li>
+                    <li class="nav-item"><a href="{{ route('user.profile') }}" class="btn btn-warning rounded-pill px-3 mx-1"><i class="fa-regular fa-user"></i> {{ Auth::user()->name }}</a></li>
+                    <li class="nav-item"><a href="{{ route('user.edit') }}" class="btn btn-warning rounded-pill px-3 mx-1"><i class="fa-solid fa-sliders"></i> Settings</a></li>
+                    <li class="nav-item"><a href="{{ route('auth.logout') }}" class="nav-link mx-2"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a></li>
                 @endauth
             </div>
 
@@ -82,7 +83,7 @@
                             <li><a href="{{ route('book.index') }}" class="text-light">Books</a></li>
                             <li><a href="{{ route('review.index') }}" class="text-light">Reviews</a></li>
                             <li><a href="{{ route('user.profile') }}" class="text-light">Profile</a></li>
-                            <li><a href="#" class="text-light">Settings</a></li>
+                            <li><a href="{{ route('user.edit') }}" class="text-light">Settings</a></li>
                         @endauth
                     </ul>
                 </div>
