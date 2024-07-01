@@ -44,3 +44,44 @@ COMMENT:
     - comment
     - user_id
     - book_id
+
+
+
+
+
+
+
+
+DONE:
+    - login, signup, logout
+    - edit profile [info, image, banner] 
+    - book [add, update, delete]
+    - comment [add, update, delete]
+    - search feature
+    - review [add, update, delete]
+
+TODO:
+    - comment [like, reply, edit reply, delete reply]
+    - book [share]
+
+    - add views on book view
+    - remove book buttons from index
+    - rerender pupolar categories [12]
+    - make [profile | user] pages as a template
+    - [edit | delete] mark them as group
+    - increase counters: [views, downloads]
+    - edit footer
+    - redesign the responsive mode
+    
+    - create the settings page [ edit image, edit banner, edit info, edit password ]
+    
+    - edit [searching feature] and make it work for [user, book, review, comment]
+    - fix a bug [book create doest not take (language, genre) values]
+
+    
+    - add softDeletes
+    
+    - verify user by email
+    
+    - protect routes with [middlewares]
+    - protect content with [policies]

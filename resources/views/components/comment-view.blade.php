@@ -15,7 +15,7 @@
     <div class="meta text-muted fs-6">
         Published: {{ $comment->created_at->DiffForHumans() }}
     </div>
-    <p class="lead m-0">
+    <p class="text-muted m-0">
         {{ $comment->comment }}
     </p>
 

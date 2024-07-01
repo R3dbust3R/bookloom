@@ -6,6 +6,7 @@ use App\Models\Book;
 use App\Models\Comment;
 use App\Models\Genre;
 use App\Models\Language;
+use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -80,7 +81,8 @@ class BookController extends Controller
     public function show(Book $book)
     {
         $comments = Comment::where('book_id', $book->id)->with('user')->OrderBy('id', 'desc')->get();
-        return view('book.show', compact('book', 'comments'));
+        $reviews = Review::where('book_id', $book->id)->with('user')->OrderBy('id', 'desc')->get();
+        return view('book.show', compact('book', 'comments', 'reviews'));
     }
 
     /**

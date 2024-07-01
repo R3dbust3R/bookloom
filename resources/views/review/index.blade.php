@@ -27,7 +27,7 @@
                             <div class="col-lg-6">
                                 <h4 class=""> <a href="{{ route('book.show', $review->book) }}">{{ $review->book->title }}</a> </h4>
                                 <hr>
-                                <span class="rating" style="color: rgb(255, 170, 0)">
+                                <span class="rating">
                                     @for ($i = 0; $i < $review->rating; $i++)
                                         <i class="fa-solid fa-star"></i>
                                     @endfor

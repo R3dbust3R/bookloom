@@ -28,7 +28,7 @@
                     <div class="lead text-capitalize"><i class="fa-solid fa-eye"></i> <span class="fw-bold">Views:</span> {{ $book->views }} times </div> 
                     <div class="lead text-capitalize"><i class="fa-solid fa-cloud-arrow-down"></i> <span class="fw-bold">Downloaded:</span> {{ $book->downloaded_times }} times </div> 
                     <div class="rating mt-3">
-                        <span class="rating fs-4" style="color: rgb(255, 170, 0)">
+                        <span class="rating fs-4">
                             @for ($i = 0; $i < ceil($book->reviews->avg('rating')); $i++)
                                 <i class="fa-solid fa-star"></i>
                             @endfor
@@ -106,6 +106,60 @@
             {{-- comment form --}}
         </div>
         {{-- comments --}}
+
+        {{-- reviews --}}
+        <div class="reviews bg-light p-5 mt-4">
+            <h3 class="sub-title mb-4">Reviews</h3>
+
+            {{-- alerts --}}
+            @session('review_success')
+                <div class="alert alert-success"> {{ session('review_success') }} </div>
+            @endsession
+
+            @session('review_error')
+                <div class="alert alert-danger"> {{ session('review_error') }} </div>
+            @endsession
+            {{-- alerts --}}
+
+            @if ($reviews->count() > 0)
+                @foreach ($reviews as $review)
+                    <x-review-view :is_owner="Auth::id() == $review->user_id" :review="$review"></x-review-view>
+                @endforeach
+            @else
+                <p class="lead">No reviews for this book</p>
+            @endif
+            {{-- review form --}}
+            <form action="{{ route('review.update') }}" method="POST" class="mt-4" id="review-form">
+                @csrf
+                @method('PUT')
+
+                <h4>Add a review</h4>
+                
+                <input type="hidden" value="{{ $book->id }}" class="hidden" name="book_id">
+                <textarea name="review" rows="8" class="form-control rounded-4">{{ old('review') }}</textarea>
+                @error('review')
+                    <p class="text-danger"> {{ $message }} </p>
+                @enderror
+
+                <span id="review-rating" class="rating d-block fs-4 my-2">
+                    <i data-value="1" class="rating-icon fa-regular fa-star c-pointer"></i>
+                    <i data-value="2" class="rating-icon fa-regular fa-star c-pointer"></i>
+                    <i data-value="3" class="rating-icon fa-regular fa-star c-pointer"></i>
+                    <i data-value="4" class="rating-icon fa-regular fa-star c-pointer"></i>
+                    <i data-value="5" class="rating-icon fa-regular fa-star c-pointer"></i>
+                </span>
+                <input id="rating-input" type="hidden" value="0" min="0" max="5" class="hidden" name="rating">
+                @error('rating')
+                <p class="text-danger"> {{ $message }} </p>
+                @enderror
+
+                <input type="hidden" value="{{ $book->id }}" class="hidden" name="book_id">
+
+                <input type="submit" value="Publish" class="btn btn-primary px-4 mt-3 rounded-pill">
+            </form>
+            {{-- review form --}}
+        </div>
+        {{-- reviews --}}
 
     </div>
 </section>

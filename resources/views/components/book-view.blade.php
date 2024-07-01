@@ -15,7 +15,7 @@
             </a>
         </h5>
         <div class="meta my-2">
-            <span class="rating" style="color: rgb(255, 170, 0)">
+            <span class="rating">
                 @for ($i = 0; $i < ceil($book->reviews->avg('rating')); $i++)
                     <i class="fa-solid fa-star"></i>
                 @endfor

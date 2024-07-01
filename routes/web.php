@@ -28,15 +28,16 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 Route::get('/signup', [AuthController::class, 'showSignupForm'])->name('auth.signup-form');
 Route::post('/signup', [AuthController::class, 'signup'])->name('auth.signup-submit');
 
-Route::get('/user/{user}', [UserController::class, 'show'])->name('user.show');
+Route::get('/user/{user:username}', [UserController::class, 'show'])->name('user.show');
 Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
 Route::get('/edit', [UserController::class, 'edit'])->name('user.edit');
-Route::post('/update/{user}', [UserController::class, 'update'])->name('user.update');
+Route::post('/update/{user:username}', [UserController::class, 'update'])->name('user.update');
 
 Route::post('/comment', [CommentController::class, 'store'])->name('comment.store');
 Route::get('/comment/{comment}', [CommentController::class, 'edit'])->name('comment.edit');
 Route::put('/comment/{comment}', [CommentController::class, 'update'])->name('comment.update');
 Route::delete('/comment/{comment}', [CommentController::class, 'destroy'])->name('comment.destroy');
+
 
 Route::get('/book', [BookController::class, 'index'])->name('book.index');
 Route::get('/book/{book}', [BookController::class, 'show'])->name('book.show');
@@ -51,5 +52,7 @@ Route::delete('/book/{book}', [BookController::class, 'destroy'])->name('book.de
 Route::get('/genre/{genre}', [GenreController::class, 'show'])->name('genre.show');
 
 Route::get('/review', [ReviewController::class, 'index'])->name('review.index');
+Route::put('/review', [ReviewController::class, 'update'])->name('review.update');
+Route::delete('/review/{review}', [ReviewController::class, 'destroy'])->name('review.destroy');
 
 Route::get('/language/{language}', [LanguageController::class, 'show'])->name('language.show');
