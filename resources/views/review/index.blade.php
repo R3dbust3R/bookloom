@@ -1,7 +1,7 @@
 <x-layout>
 
 {{-- header --}}
-<header class="header bg-warning text-center py-5">
+<header class="header bg-light text-center py-5">
     <h2>Reviews</h2>
 </header>
 {{-- header --}}
@@ -13,7 +13,7 @@
         <div class="row">
             @foreach ($reviews as $review)
                 <div class="col-md-6 d-flex">
-                    <div class="review bg-light p-4 mb-4">
+                    <div class="review rounded-4 border bg-light p-3 mb-3">
 
                         <div class="row">
                             <div class="col-lg-6">
@@ -21,7 +21,7 @@
                                     <img 
                                     src="{{ asset($review->book->cover ? 'storage/' . $review->book->cover : 'storage/books/default.png') }}"
                                     alt="{{ $review->book->title }} Cover"
-                                    class="d-block w-100">
+                                    class="d-block rounded-3 border w-100">
                                 </a>
                             </div>
                             <div class="col-lg-6">
@@ -54,6 +54,19 @@
                                 <p class="lead">
                                     {{ $review->review }}
                                 </p>
+
+                                {{-- owner controls --}}
+                                @if ($review->user_id == Auth::id())
+                                    <div class="owner-controls btn-group w-100">
+                                        <a href="{{ route('book.show', $review->book_id) }}#review-form" class="btn btn-primary rounded-start-3 w-50"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
+                                        <form action="{{ route('review.destroy', $review) }}" method="POST" class="d-inline-block w-50">
+                                            @csrf @method('DELETE')
+                                            <button type="submit" class="btn btn-danger rounded-start-0 rounded-end-3 w-100"><i class="fa-solid fa-trash-can"></i> Delete</a>
+                                        </form>
+                                    </div>
+                                @endif
+                                {{-- owner controls --}}
+
                             </div>
                         </div>
 

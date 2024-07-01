@@ -13,7 +13,9 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        $reviews = Review::with(['user', 'book'])->paginate(12);
+        $reviews = Review::with(['user', 'book'])
+            ->OrderBy('id', 'desc')
+            ->paginate(12);
         return view('review.index', compact('reviews'));
     }
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Book;
 use App\Models\Genre;
+use App\Models\User;
 
 class HomePageController extends Controller
 {
@@ -19,12 +20,23 @@ class HomePageController extends Controller
     public function search(Request $request) {
         $validated = $request->validate([ 'query' => 'string|required' ]);
         $query = $request->input('query');
-        $result = Book::with(['user', 'language', 'genre', 'reviews', 'comments'])
+
+
+        // $users = User::where('username', 'LIKE', '%' . $query . '%')
+        //     ->orWhere('email', 'LIKE', '%' . $query . '%')
+        //     ->orWhere('name', 'LIKE', '%' . $query . '%')
+        //     ->OrderBy('id', 'desc')
+        //     ->paginate(12);
+
+        $books = Book::with(['user', 'genre'])
             ->where('title', 'LIKE', '%' . $query . '%')
             ->orWhere('description', 'LIKE', '%' . $query . '%')
+            ->OrderBy('id', 'desc')
             ->paginate(12);
 
-        return view('home.search', compact('result', 'query'));
+
+
+        return view('home.search', compact('books', 'query'));
     }
 
     public function about() {

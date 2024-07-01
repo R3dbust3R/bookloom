@@ -24,22 +24,26 @@
                 @endfor
             </span>
             {{-- <span class="d-block text-muted">Written by: <a href="#">{{ $book->author }}</a></span> --}}
-            <span class="d-block text-muted">Published by: <a href="{{ route('user.show', $book->user) }}">{{ $book->user->name }}</a></span>
+            {{-- <span class="d-block text-muted">Published by: <a href="{{ route('user.show', $book->user) }}">{{ $book->user->name }}</a></span> --}}
             {{-- <span class="d-block text-muted">Published: {{ $book->created_at->DiffForHumans() }}</span> --}}
             {{-- <span class="d-block text-muted">Pages: {{ $book->page_count }}</span> --}}
-            {{-- <span class="d-block text-muted">Viewed: {{ $book->views }}</span> --}}
-            <span class="d-block text-muted">Downloaded: {{ $book->downloaded_times }} times</span>
+            <span class="d-block text-muted"><i class="fa-solid fa-eye"></i> {{ $book->views }} views</span>
+            <span class="d-block text-muted"><i class="fa-solid fa-cloud-arrow-down"></i> {{ $book->downloaded_times }} downloads</span>
         </div>
-        <a href="{{ route('book.read', $book) }}" class="btn btn-warning btn-sm rounded-pill px-4 mb-1">Read</a>
-        <a href="{{ asset('storage/books/books/' . $book->book_url ) }}" download="{{ asset('storage/books/books/' . $book->book_url ) }}" class="btn btn-dark btn-sm rounded-pill px-4 mb-1">Download</a>
+        {{-- <a href="{{ route('book.read', $book) }}" class="btn btn-warning btn-sm rounded-pill px-4 mb-1">Read</a>
+        <a href="{{ asset('storage/books/books/' . $book->book_url ) }}" download="{{ asset('storage/books/books/' . $book->book_url ) }}" class="btn btn-dark btn-sm rounded-pill px-4 mb-1">Download</a> --}}
 
         @if ($is_owner)
-            <a href="{{ route('book.edit', $book) }}" class="btn btn-success btn-sm rounded-pill px-4 mb-1">Edit</a>
-            <form action="{{ route('book.destroy', $book) }}" method="POST" class="d-inline-block">
-                @csrf
-                @method('DELETE')
-                <input type="submit" value="Delete" class="btn btn-danger btn-sm rounded-pill px-4 mb-1">
-            </form>
+            <div class="btn-group w-100">
+                <a href="{{ route('book.edit', $book) }}" class="btn btn-success rounded-start-3 btn-sm w-50"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
+                <form action="{{ route('book.destroy', $book) }}" method="POST" class="d-inline-block w-50">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger rounded-start-0 rounded-end-3 btn-sm w-100">
+                        <i class="fa-solid fa-trash-can"></i> Delete
+                    </button>
+                </form>
+            </div>
         @endif
 
     </div>

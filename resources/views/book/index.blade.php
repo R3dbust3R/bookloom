@@ -9,7 +9,7 @@
 
             @foreach ($books as $book)
                 <div class="col-md-4 col-lg-3">
-                    <x-book-view :book="$book"></x-book-view>
+                    <x-book-view :is_owner="$book->user_id == Auth::id()" :book="$book"></x-book-view>
                 </div>
             @endforeach
 

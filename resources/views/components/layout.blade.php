@@ -40,7 +40,7 @@
                 @endguest
                 
                 @auth
-                    <li class="nav-item"><a href="{{ route('book.create') }}" class="btn bg-white border rounded-pill px-3 mx-1"><i class="fa-regular fa-plus"></i> Upload eBook</a></li>
+                    <li class="nav-item"><a href="{{ route('book.create') }}" class="btn bg-white border rounded-pill px-3 mx-1"><i class="fa-regular fa-plus"></i> Upload</a></li>
                     <li class="nav-item"><a href="{{ route('user.profile') }}" class="btn btn-warning rounded-pill px-3 mx-1"><i class="fa-regular fa-user"></i> {{ Auth::user()->name }}</a></li>
                     <li class="nav-item"><a href="{{ route('user.edit') }}" class="btn btn-warning rounded-pill px-3 mx-1"><i class="fa-solid fa-sliders"></i> Settings</a></li>
                     <li class="nav-item"><a href="{{ route('auth.logout') }}" class="nav-link mx-2"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a></li>

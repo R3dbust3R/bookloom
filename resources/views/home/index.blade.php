@@ -29,17 +29,19 @@
         <div class="row">
 
             @foreach ($genres as $genre)
-            
-                <div class="col-sm-6 col-md-4 col-lg-3">
-                    <div class="genre bg-white rounded-3 position-relative mb-4">
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">{{ $genre->books->count() }}</span>
-                        <h4 class="text-capitalize genre m-0">
-                            <a href="{{ route('genre.show', $genre) }}" class="d-block w-100 p-4">
-                                {{ $genre->name }}
-                            </a>
-                        </h4>
+
+                @if ($genre->books->count())
+                    <div class="col-sm-6 col-md-4 col-lg-3">
+                        <div class="genre bg-white rounded-3 position-relative mb-4">
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-primary">{{ $genre->books->count() }}</span>
+                            <h4 class="text-capitalize genre m-0">
+                                <a href="{{ route('genre.show', $genre) }}" class="d-block w-100 p-4">
+                                    {{ $genre->name }}
+                                </a>
+                            </h4>
+                        </div>
                     </div>
-                </div>
+                @endif
                 
             @endforeach
 
