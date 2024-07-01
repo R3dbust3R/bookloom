@@ -7,6 +7,7 @@ use App\Http\Controllers\GenreController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -31,6 +32,11 @@ Route::get('/user/{user}', [UserController::class, 'show'])->name('user.show');
 Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
 Route::get('/edit', [UserController::class, 'edit'])->name('user.edit');
 Route::post('/update/{user}', [UserController::class, 'update'])->name('user.update');
+
+Route::post('/comment', [CommentController::class, 'store'])->name('comment.store');
+Route::get('/comment/{comment}', [CommentController::class, 'edit'])->name('comment.edit');
+Route::put('/comment/{comment}', [CommentController::class, 'update'])->name('comment.update');
+Route::delete('/comment/{comment}', [CommentController::class, 'destroy'])->name('comment.destroy');
 
 Route::get('/book', [BookController::class, 'index'])->name('book.index');
 Route::get('/book/{book}', [BookController::class, 'show'])->name('book.show');

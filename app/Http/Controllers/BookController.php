@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Comment;
 use App\Models\Genre;
 use App\Models\Language;
 use Illuminate\Http\Request;
@@ -16,7 +17,9 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = Book::with(['user', 'language', 'genre', 'comments'])->paginate(12);
+        $books = Book::with(['user', 'language', 'genre', 'comments'])
+                ->orderBy('id', 'desc')
+                ->paginate(12);
         return view('book.index', compact('books'));
     }
 
@@ -76,7 +79,8 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        return view('book.show', compact('book'));
+        $comments = Comment::where('book_id', $book->id)->with('user')->OrderBy('id', 'desc')->get();
+        return view('book.show', compact('book', 'comments'));
     }
 
     /**

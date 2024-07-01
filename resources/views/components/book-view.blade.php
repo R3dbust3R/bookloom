@@ -1,20 +1,20 @@
 @props(['book', 'is_owner' => false])
 
-<div class="book-container bg-light mb-4">
+<div class="single-book-container bg-light border rounded-4 overflow-hidden mb-4">
     <a href="{{ route('book.show', $book) }}">
         <img 
         src="{{ asset($book->cover ? 'storage/' . $book->cover : 'storage/books/default.png') }}" 
         alt="{{ $book->title }}"
         class="w-100">
     </a>
-    <hr>
+
     <div class="footer p-3">
         <h5 class="text-capitalize">
             <a href="{{ route('book.show', $book) }}">
                 {{ $book->title }}
             </a>
         </h5>
-        <div class="meta my-3">
+        <div class="meta my-2">
             <span class="rating" style="color: rgb(255, 170, 0)">
                 @for ($i = 0; $i < ceil($book->reviews->avg('rating')); $i++)
                     <i class="fa-solid fa-star"></i>

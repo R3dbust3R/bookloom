@@ -21,7 +21,13 @@ class UserController extends Controller
     }
 
     public function profile() {
-        $books = Book::with(['user', 'language', 'genre', 'comments', 'reviews'])->paginate(12);
+        // $books = Book::with()
+        //         ->latest()
+        //         ->paginate(1);
+        $books = Book::where('user_id', Auth::id())
+                ->with(['user', 'language', 'genre', 'comments', 'reviews'])
+                ->orderBy('id', 'desc')
+                ->paginate(12);
         return view('user.profile', compact('books'));
     }
 
@@ -46,7 +52,11 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('user.show', compact('user'));
+        $books = Book::where('user_id', $user->id)
+                ->with(['user', 'genre', 'language'])
+                ->OrderBy('id', 'desc')
+                ->paginate(12);
+        return view('user.show', compact('user', 'books'));
     }
 
     /**

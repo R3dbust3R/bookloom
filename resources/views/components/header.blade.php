@@ -1,4 +1,4 @@
-<header class="main-header bg-light py-5">
+<header class="main-header bg-light py-5 border-bottom">
     <div class="container">
         <div class="row">
             <div class="col-md-6">

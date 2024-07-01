@@ -9,7 +9,9 @@ use App\Models\Genre;
 class HomePageController extends Controller
 {
     public function index() {
-        $books = Book::with(['user', 'language', 'genre', 'reviews', 'comments'])->OrderBy('id', 'desc')->paginate(8);
+        $books = Book::with(['user', 'language', 'genre', 'reviews', 'comments'])
+                        ->OrderBy('id', 'desc')
+                        ->paginate(16);
         $genres = Genre::with('books')->get();
         return view('home.index', compact('books', 'genres'));
     }

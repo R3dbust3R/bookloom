@@ -44,9 +44,13 @@
 
 
 {{-- about --}}
-<section class="about py-5">
+<hr>
+<section class="about bg-light py-5">
     <div class="container">
-        <h4 class="text-capitalize my-2">About {{ Auth::user()->name }}</h4>
+        <h4 class="text-capitalize my-2">
+            <span class="text-muted">About</span> {{ Auth::user()->name }}
+            <span class="badge text-bg-warning fw-light">&commat;{{ Auth::user()->username }}</span>
+        </h4>
         <p class="lead">
             {{ Auth::user()->bio }}
         </p>
@@ -62,13 +66,19 @@
 
         <div class="row">
 
-            @foreach (Auth::user()->books as $book)
+            @foreach ($books as $book)
                 <div class="col-md-4 col-lg-3">
                     <x-book-view is_owner :book="$book"></x-book-view>
                 </div>
             @endforeach
 
         </div>
+
+        {{-- pagination --}}
+        <div class="pagination">
+            {{ $books->links() }}
+        </div>
+        {{-- pagination --}}
 
     </div>
 </section>

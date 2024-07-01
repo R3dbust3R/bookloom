@@ -31,6 +31,14 @@ a {
     &:hover:before {
         width: 160px;
     }
+    &.title-center:before {
+        left: calc(50% - 40px);
+        background-color: white;
+    }
+    &.title-center:hover:before {
+        left: calc(50% - 80px);
+        background-color: white;
+    }
 }
 .c-pointer {
     cursor: pointer;
@@ -80,7 +88,7 @@ a {
 // search-form
 
 
-// profile
+// profile page
 .profile-header {
     .profile-banner {
         height: 400px;
@@ -100,4 +108,35 @@ a {
         padding: 7px 10px;
     }
 }
-// profile
+// profile page
+
+// book view
+.single-book-container {
+    img {
+        transition: all .25s ease-in-out;
+    }
+    &:hover {
+      img {
+        filter: sepia(1);
+        transform: scale(1.1);
+        transform-origin: bottom;
+      }  
+    }
+}
+// book view
+
+// single genre page (category)
+.genre-header {
+    background-image: url('storage/books/D9KwbXopTxMAkqIQ6vP3L8CvHeo4JLKTfufmFauc.jpg');
+    background-position: center center;
+    background-size: cover;
+}
+// genre genre language
+
+// single language page (category)
+.language-header {
+    background-image: url('storage/users/tYSYbcw7a9jnaAgwLmB2oYcR2t3gQd8dZ7ze1ZbF.jpg');
+    background-position: center bottom;
+    background-size: cover;
+}
+// single genre language

@@ -13,7 +13,7 @@
                     <img 
                         src="{{ asset($book->cover ? 'storage/' . $book->cover : 'storage/books/default.png') }}" 
                         alt="{{ $book->title }}"
-                        class="d-block w-100">
+                        class="d-block img-thumbnail rounded-4 w-100">
                 </book>
             </div>
 
@@ -27,6 +27,16 @@
                     <div class="lead text-capitalize"><i class="fa-solid fa-file"></i> <span class="fw-bold">Pages:</span> {{ $book->page_count }} pages</div> 
                     <div class="lead text-capitalize"><i class="fa-solid fa-eye"></i> <span class="fw-bold">Views:</span> {{ $book->views }} times </div> 
                     <div class="lead text-capitalize"><i class="fa-solid fa-cloud-arrow-down"></i> <span class="fw-bold">Downloaded:</span> {{ $book->downloaded_times }} times </div> 
+                    <div class="rating mt-3">
+                        <span class="rating fs-4" style="color: rgb(255, 170, 0)">
+                            @for ($i = 0; $i < ceil($book->reviews->avg('rating')); $i++)
+                                <i class="fa-solid fa-star"></i>
+                            @endfor
+                            @for ($i = 0; $i < 5 - ceil($book->reviews->avg('rating')); $i++)
+                                <i class="fa-regular fa-star"></i>
+                            @endfor
+                        </span>
+                    </div>
                 </div>
                 <hr>
                 <div class="btns bg-light px-5 py-3">
@@ -64,13 +74,36 @@
         {{-- comments --}}
         <div class="comments bg-light p-5 mt-4">
             <h3 class="sub-title mb-4">Comments</h3>
-            @if ($book->comments->count() > 0)
-                @foreach ($book->comments as $comment)
-                    <x-comment-view :comment="$comment"></x-comment-view>
+
+            {{-- alerts --}}
+            @session('comment_success')
+                <div class="alert alert-success"> {{ session('comment_success') }} </div>
+            @endsession
+
+            @session('comment_error')
+                <div class="alert alert-danger"> {{ session('comment_error') }} </div>
+            @endsession
+            {{-- alerts --}}
+
+            @if ($comments->count() > 0)
+                @foreach ($comments as $comment)
+                    <x-comment-view :is_owner="Auth::id() == $comment->user_id" :comment="$comment"></x-comment-view>
                 @endforeach
             @else
                 <p class="lead">No comments for this book</p>
             @endif
+            {{-- comment form --}}
+            <form action="{{ route('comment.store') }}" method="POST" class="mt-4">
+                @csrf
+                <h4>Write a comment</h4>
+                <input type="hidden" value="{{ $book->id }}" class="hidden" name="book_id">
+                <textarea name="comment" rows="12" class="form-control rounded-4"></textarea>
+                @error('comment')
+                    <p class="text-danger"> {{ $message }} </p>
+                @enderror
+                <input type="submit" value="Publish" class="btn btn-primary px-4 mt-3 rounded-pill">
+            </form>
+            {{-- comment form --}}
         </div>
         {{-- comments --}}
 

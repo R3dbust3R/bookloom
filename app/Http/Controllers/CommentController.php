@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
@@ -28,7 +29,21 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'comment' => ['required', 'string', 'min:5', 'max:5000'],
+            'book_id' => ['required', 'integer'],
+        ]);
+
+        $validated['user_id'] = Auth::id();
+
+        $comment = New Comment( $validated );
+
+        if ($comment->save()) {
+            return redirect()->back()->with('comment_success', 'Comment published succssfuly!');
+        }
+
+        return redirect()->back()->with('comment_error', 'There was an error while trying to published your comment!');
+
     }
 
     /**
@@ -44,7 +59,7 @@ class CommentController extends Controller
      */
     public function edit(Comment $comment)
     {
-        //
+        return view('comment.edit', compact('comment'));
     }
 
     /**
@@ -52,7 +67,19 @@ class CommentController extends Controller
      */
     public function update(Request $request, Comment $comment)
     {
-        //
+        $validated = $request->validate([
+            'comment' => ['required', 'string', 'min:5', 'max:5000'],
+        ]);
+
+
+        if ($comment->update( $validated )) {
+
+            return redirect()->back()->with('comment_success', 'Comment updated succssfuly!');
+
+        }
+
+        return redirect()->back()->with('comment_error', 'There was an error while trying to update your comment!');
+
     }
 
     /**
@@ -60,6 +87,9 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        //
+        if ($comment->delete()) {
+            return redirect()->back()->with('comment_success', 'Comment deleted succssfuly!');
+        }
+        return redirect()->back()->with('comment_error', 'There was an error while trying to delete your comment!');
     }
 }

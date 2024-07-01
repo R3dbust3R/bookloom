@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use App\Models\Language;
 use Illuminate\Http\Request;
 
@@ -36,7 +37,11 @@ class LanguageController extends Controller
      */
     public function show(Language $language)
     {
-        return 'show this language: ' . $language->name;
+        $books = Book::where('language_id', $language->id)
+                ->with(['user', 'genre'])
+                ->OrderBy('id', 'desc')
+                ->paginate(12);
+        return view('language.show', compact('language', 'books'));
     }
 
     /**

@@ -37,7 +37,9 @@ class GenreController extends Controller
      */
     public function show(Genre $genre)
     {
-        $books = Book::where('genre_id', $genre->id)->paginate(12);
+        $books = Book::where('genre_id', $genre->id)
+                ->OrderBy('id', 'desc')
+                ->paginate(12);
         return view('genre.show', compact('genre', 'books'));
     }
 

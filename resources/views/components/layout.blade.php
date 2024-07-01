@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="bookloom-styles.css">
+    <link rel="stylesheet" href="{{ asset('bookloom-styles.css') }}">
     <title>BookLoom</title>
 </head>
 <body>
@@ -69,21 +69,21 @@
                     <h3><a href="{{ route('home.index') }}" class="text-light">Book<span class="text-warning">Loom</span></a></h3>
                     <p class="lead">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Harum ipsa aliquam nam?</p>
                     <p class="copyright fw-light">
-                        Designed & Developed with <i class="fa-solid fa-heart"></i> by OTMANE TALHAOUI <br>
-                        &copy; BookLoom {{ date('Y') }}
+                        Designed & Developed with <i class="fa-solid fa-heart text-warning"></i> by <span class="text-warning">OTMANE TALHAOUI</span> <br>
+                        <a href="{{ route('home.index') }}" class="text-warning">&copy; BookLoom</a> {{ date('Y') }}
                     </p>
                 </div>
 
                 <div class="col-sm-6 col-md-3">
                     <h4>Quick Links</h4>
                     <ul class="list-unstyled fw-light">
-                        <li><a href="{{ route('home.about') }}" class="text-light">About us</a></li>
+                        <li><a href="{{ route('home.about') }}" class="text-warning">About us</a></li>
                         
                         @auth
-                            <li><a href="{{ route('book.index') }}" class="text-light">Books</a></li>
-                            <li><a href="{{ route('review.index') }}" class="text-light">Reviews</a></li>
-                            <li><a href="{{ route('user.profile') }}" class="text-light">Profile</a></li>
-                            <li><a href="{{ route('user.edit') }}" class="text-light">Settings</a></li>
+                            <li><a href="{{ route('book.index') }}" class="text-warning">Books</a></li>
+                            <li><a href="{{ route('review.index') }}" class="text-warning">Reviews</a></li>
+                            <li><a href="{{ route('user.profile') }}" class="text-warning">Profile</a></li>
+                            <li><a href="{{ route('user.edit') }}" class="text-warning">Settings</a></li>
                         @endauth
                     </ul>
                 </div>
@@ -91,8 +91,8 @@
                 <div class="col-sm-6 col-md-3">
                     <h4>Useful Links</h4>
                     <ul class="list-unstyled fw-light">
-                        <li><a href="{{ route('home.terms-and-conditions') }}" class="text-light">Terms and conditions</a></li>
-                        <li><a href="{{ route('home.privacy-policy') }}" class="text-light">Privacy policy</a></li>
+                        <li><a href="{{ route('home.terms-and-conditions') }}" class="text-warning">Terms and conditions</a></li>
+                        <li><a href="{{ route('home.privacy-policy') }}" class="text-warning">Privacy policy</a></li>
                     </ul>
                 </div>
 

@@ -1,10 +1,10 @@
 <x-layout>
 
 {{-- header --}}
-<header class="genre-header text-center py-5 mb-2">
+<header class="language-header text-center py-5 mb-2">
     <div class="container">
         <h2 class="section-title title-center text-capitalize text-light py-4"> 
-            {{ $genre->name }} Category
+            {{ $language->name }}
         </h2>
     </div>
 </header>

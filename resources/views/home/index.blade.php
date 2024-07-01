@@ -12,7 +12,7 @@
 
             @foreach ($books as $book)
                 <div class="col-md-4 col-lg-3">
-                    <x-book-view :book="$book"></x-book-view>
+                    <x-book-view :is_owner="Auth::id() == $book->user_id" :book="$book"></x-book-view>
                 </div>
             @endforeach
 
@@ -30,11 +30,12 @@
 
             @foreach ($genres as $genre)
             
-                <div class="col-md-6">
-                    <div class="genre bg-white mb-4">
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <div class="genre bg-white rounded-3 position-relative mb-4">
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">{{ $genre->books->count() }}</span>
                         <h4 class="text-capitalize genre m-0">
-                            <a href="{{ route('genre.show', $genre) }}" class="d-block w-100 p-5">
-                                {{ $genre->name }} {{ $genre->books->count() }}
+                            <a href="{{ route('genre.show', $genre) }}" class="d-block w-100 p-4">
+                                {{ $genre->name }}
                             </a>
                         </h4>
                     </div>
@@ -50,7 +51,7 @@
 {{-- random quote --}}
 <section class="latest-books py-5">
     <div class="container">
-        <div class="random-quote bg-warning rounded-4 p-5">
+        <div class="random-quote bg-dark text-warning rounded-4 p-5">
             <div class="icon mb-4">
                 <i class="fa-solid fa-quote-left fs-1"></i>
             </div>

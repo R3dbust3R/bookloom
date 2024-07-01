@@ -43,7 +43,35 @@ class DatabaseSeeder extends Seeder
             Language::factory()->create(['name' => $language]);
         }
 
-        $genres = ['default', 'fiction', 'action', 'horror', 'comedy'];
+        $genres = [
+            'uncategorized', 
+            'fiction', 
+            'horror', 
+            'comedy', 
+            'romance',
+            'mystery', 
+            'thriller', 
+            'science fiction', 
+            'fantasy', 
+            'historical fiction', 
+            'biography',
+            'autobiography', 
+            'self-help', 
+            'philosophy', 
+            'travel', 
+            'young adult', 
+            'children', 
+            'non-fiction', 
+            'adventure', 
+            'drama', 
+            'crime', 
+            'poetry', 
+            'graphic novel', 
+            'dystopian', 
+            'satire', 
+            'memoir'
+        ];
+        
         foreach ($genres as $genre) {
             Genre::factory()->create(['name' => $genre]);
         }
