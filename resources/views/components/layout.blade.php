@@ -101,6 +101,10 @@
     </footer>
     {{-- footer --}}
 
+    {{-- scroll to top --}}
+    <div class="scroll-to-top" id="scroll-to-top"> <i class="fa-solid fa-arrow-turn-up"></i> </div>
+    {{-- scroll to top --}}
+
     <script src="https://kit.fontawesome.com/33189c9c9d.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
     <script src="{{ asset('bookloom.js') }}"></script>

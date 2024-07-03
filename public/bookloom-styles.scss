@@ -1,3 +1,8 @@
+// varaibles
+$mainColor: #ffc107;
+// varaibles
+
+
 // global
 * {
     padding: 0;
@@ -144,3 +149,29 @@ span.rating {
     background-size: cover;
 }
 // single genre language
+
+
+// scroll to top
+.scroll-to-top {
+    position: fixed;
+    bottom: 12px;
+    right: -40px;
+    width: 38px;
+    height: 38px;
+    line-height: 38px;
+    border-radius: 12px;
+    background-color: #212529;
+    color: $mainColor;
+    text-align: center;
+    user-select: none;
+    cursor: pointer;
+    transition: all .25s ease-in-out;
+    &:hover {
+        background-color: $mainColor;
+        color: black;
+    }
+    &.show {
+        right: 12px;
+    }
+}
+// scroll to top

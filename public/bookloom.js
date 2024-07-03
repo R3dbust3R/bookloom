@@ -37,7 +37,22 @@ window.onload = function () {
             ratingInput.value = this.dataset.value;
         });
     });
-
     // for rating system 
+
+
+    // scroll to top
+    let scrollTopBtn = document.getElementById('scroll-to-top');
+    scrollTopBtn.addEventListener('click', function () {
+        window.document.body.scrollIntoView(-1);
+    });
+
+    window.onscroll = function () {
+        if (this.scrollY >= 500) {
+            scrollTopBtn.classList.add('show');
+        } else {
+            scrollTopBtn.classList.remove('show');
+        }
+    }
+    // scroll to top
 
 }

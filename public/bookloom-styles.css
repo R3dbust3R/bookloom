@@ -130,4 +130,29 @@ span.rating {
   background-image: url("storage/users/tYSYbcw7a9jnaAgwLmB2oYcR2t3gQd8dZ7ze1ZbF.jpg");
   background-position: center bottom;
   background-size: cover;
+}
+
+.scroll-to-top {
+  position: fixed;
+  bottom: 12px;
+  right: -40px;
+  width: 38px;
+  height: 38px;
+  line-height: 38px;
+  border-radius: 12px;
+  background-color: #212529;
+  color: #ffc107;
+  text-align: center;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+}
+.scroll-to-top:hover {
+  background-color: #ffc107;
+  color: black;
+}
+.scroll-to-top.show {
+  right: 12px;
 }/*# sourceMappingURL=bookloom-styles.css.map */
