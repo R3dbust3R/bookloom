@@ -199,8 +199,34 @@ class UserController extends Controller
 
         return redirect()->back()->with('error', 'There was an error while trying to update your password, try again later!');
 
+    }
 
+    /**
+     * Update user profile image
+     */
+    public function updateProfileImage(Request $request) {
+
+        $user = Auth::user();
+
+        $validated_image = $request->validate([
+            'profile_image'     => ['required', 'image', 'mimes:jpeg,jpg,png,avif,webp', 'max:5120'],
+        ]);
+
+        if ($user->profile_image) {
+            Storage::disk('public')->delete($user->profile_image);
+        }
+
+        $profile_image = $request->file('profile_image')->store('users', 'public');
+        $validated_image['profile_image'] = $profile_image;
+
+        if ($user->update($validated_image)) {
+            return redirect()->back()->with('success', 'Your profile image updated successfully!');
+        }
+
+        return redirect()->back()->with('error', 'There was an error while trying to update your profile image, try again later!');
 
     }
+
+
 
 }

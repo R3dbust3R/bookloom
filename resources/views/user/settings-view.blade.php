@@ -172,12 +172,12 @@
 {{-- profile image form --}}
 <section class="container bg-light border rounded-4 p-4 mb-4">
     <h2 class="section-title mb-4">Edit your profile image</h2>
-    <form action="#" method="POST" class="" enctype="multipart/form-data">
+    <form action="{{ route('user.settings.update-image') }}" method="POST" class="" enctype="multipart/form-data">
         @csrf
         <div class="row">
 
-            <div class="col-md-12">
-                <div class="form-group mb-3">
+            <div class="col-sm-10">
+                <div class="form-group center mb-3">
                     <label for="profile_image" class="text-muted mb-2">Profile image (Optional)</label>
                     <input 
                         type="file" 
@@ -185,6 +185,16 @@
                         value="{{ old('profile_image') }}"
                         name="profile_image" id="profile_image">
                     @error('profile_image') <p class="text-danger"> {{ $message }} </p> @enderror
+                </div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="form-group mb-3">
+                    <img 
+                        src="{{ asset('storage/' . ($user->profile_image ? $user->profile_image : 'users/default.png')) }}" 
+                        alt="{{ $user->profile_image }}'s profile image"
+                        class="d-block w-100 border rounded-4"
+                        onclick="document.getElementById('profile_image').click()">
                 </div>
             </div>
 
