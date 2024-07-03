@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Book;
 use App\Models\Genre;
+use App\Models\Review;
 use App\Models\User;
 
 class HomePageController extends Controller
@@ -12,9 +13,13 @@ class HomePageController extends Controller
     public function index() {
         $books = Book::with(['user', 'language', 'genre', 'reviews', 'comments'])
                         ->OrderBy('id', 'desc')
-                        ->paginate(16);
+                        ->paginate(8);
         $genres = Genre::with('books')->get();
-        return view('home.index', compact('books', 'genres'));
+
+        $reviews = Review::with(['user', 'book'])
+                        ->OrderBy('id', 'desc')
+                        ->paginate(4);
+        return view('home.index', compact('books', 'genres', 'reviews'));
     }
 
     public function search(Request $request) {
