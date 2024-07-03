@@ -123,7 +123,7 @@
 {{-- password form --}}
 <section class="container bg-white border rounded-4 p-4 mb-4">
     <h2 class="section-title mb-5">Edit your password</h2>
-    <form action="#" method="POST" class="">
+    <form action="{{ route('user.settings.update-password') }}" method="POST" class="">
         @csrf
         <div class="row">
 

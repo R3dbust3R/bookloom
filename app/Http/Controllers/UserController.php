@@ -175,5 +175,32 @@ class UserController extends Controller
         return redirect()->back()->with('error', 'There was an error while trying to update your info, try again later!');
 
     }
+    
+    /**
+     * Update user password
+     */
+    public function updatePassword(Request $request) {
+
+        $user = Auth::user();
+
+        $validated_password = $request->validate([
+            'old_password'      => ['required', 'string', 'min:5'], // Needed to verify the user
+            'password'          => ['required', 'string', 'min:5', 'confirmed'],
+        ]);
+
+        // Check if the provided old password matches the user's current password
+        if (!Hash::check($request->input('old_password'), $user->password)) {
+            return redirect()->back()->withErrors(['old_password' => 'Old password is not correct']);
+        }
+
+        if ($user->update($validated_password)) {
+            return redirect()->back()->with('success', 'Your password updated successfully!');
+        }
+
+        return redirect()->back()->with('error', 'There was an error while trying to update your password, try again later!');
+
+
+
+    }
 
 }
