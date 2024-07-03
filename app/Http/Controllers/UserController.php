@@ -227,6 +227,32 @@ class UserController extends Controller
 
     }
 
+    /**
+     * Update user profile banner
+     */
+    public function updateProfileBanner(Request $request) {
+
+        $user = Auth::user();
+
+        $validated_banner = $request->validate([
+            'profile_banner'     => ['required', 'image', 'mimes:jpeg,jpg,png,avif,webp', 'max:5120'],
+        ]);
+
+        if ($user->profile_banner) {
+            Storage::disk('public')->delete($user->profile_banner);
+        }
+
+        $profile_banner = $request->file('profile_banner')->store('users/banners', 'public');
+        $validated_banner['profile_banner'] = $profile_banner;
+
+        if ($user->update($validated_banner)) {
+            return redirect()->back()->with('success', 'Your banner updated successfully!');
+        }
+
+        return redirect()->back()->with('error', 'There was an error while trying to update your banner, try again later!');
+
+    }
+
 
 
 }

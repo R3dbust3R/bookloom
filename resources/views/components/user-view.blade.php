@@ -20,7 +20,7 @@
 
         <div 
             class="profile-banner text-center rounded-4" 
-            style="background-image: url({{ asset('storage/' . ($user->profile_banner ? $user->profile_banner : 'users/bananers/default.png')) }})">
+            style="background-image: url({{ asset('storage/' . ($user->profile_banner ? $user->profile_banner : 'users/banners/default.png')) }})">
         </div>
 
         <div class="profile-img-container text-center position-relative">

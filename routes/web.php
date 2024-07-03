@@ -36,6 +36,7 @@ Route::get('/settings', [UserController::class, 'settingsView'])->name('user.set
 Route::post('/settings/update/info', [UserController::class, 'updateInfo'])->name('user.settings.update-info');
 Route::post('/settings/update/password', [UserController::class, 'updatePassword'])->name('user.settings.update-password');
 Route::post('/settings/update/image', [UserController::class, 'updateProfileImage'])->name('user.settings.update-image');
+Route::post('/settings/update/banner', [UserController::class, 'updateProfileBanner'])->name('user.settings.update-banner');
 
 Route::post('/comment', [CommentController::class, 'store'])->name('comment.store');
 Route::get('/comment/{comment}', [CommentController::class, 'edit'])->name('comment.edit');

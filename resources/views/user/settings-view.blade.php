@@ -192,7 +192,7 @@
                 <div class="form-group mb-3">
                     <img 
                         src="{{ asset('storage/' . ($user->profile_image ? $user->profile_image : 'users/default.png')) }}" 
-                        alt="{{ $user->profile_image }}'s profile image"
+                        alt="{{ $user->name }}'s profile image"
                         class="d-block w-100 border rounded-4"
                         onclick="document.getElementById('profile_image').click()">
                 </div>
@@ -211,11 +211,11 @@
 {{-- profile banner form --}}
 <section class="container bg-white border rounded-4 p-4 mb-5">
     <h2 class="section-title mb-4">Edit your profile banner</h2>
-    <form action="#" method="POST" class="" enctype="multipart/form-data">
+    <form action="{{ route('user.settings.update-banner') }}" method="POST" class="" enctype="multipart/form-data">
         @csrf
         <div class="row">
 
-            <div class="col-md-12">
+            <div class="col-sm-10">
                 <div class="form-group mb-3">
                     <label for="profile_banner" class="text-muted mb-2">Profile banner (Optional)</label>
                     <input 
@@ -224,6 +224,16 @@
                         value="{{ old('profile_banner') }}"
                         name="profile_banner" id="profile_banner">
                     @error('profile_banner') <p class="text-danger"> {{ $message }} </p> @enderror
+                </div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="form-group mb-3">
+                    <img 
+                        src="{{ asset('storage/' . ($user->profile_banner ? $user->profile_banner : 'users/banners/default.png')) }}" 
+                        alt="{{ $user->name }}'s banner image"
+                        class="d-block w-100 border rounded-4"
+                        onclick="document.getElementById('profile_banner').click()">
                 </div>
             </div>
 
