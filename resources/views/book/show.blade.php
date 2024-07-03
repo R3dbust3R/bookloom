@@ -41,7 +41,7 @@
                 <hr>
                 <div class="btns bg-light px-5 py-3">
                     <a href="{{ route('book.read', $book) }}" class="btn btn-primary px-4 rounded-pill"><i class="fa-brands fa-readme"></i> Read book</a>
-                    <a href="{{ asset('storage/books/books/' . $book->book_url) }}" target="_blank" class="btn btn-primary px-4 rounded-pill"><i class="fa-solid fa-cloud-arrow-down"></i> Download book</a>
+                    <a href="{{ route('book.download', $book) }}" class="btn btn-primary px-4 rounded-pill"><i class="fa-solid fa-cloud-arrow-down"></i> Download book</a>
                 </div>
                 
                 @auth 

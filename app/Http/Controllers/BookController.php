@@ -82,6 +82,9 @@ class BookController extends Controller
     {
         $comments = Comment::where('book_id', $book->id)->with('user')->OrderBy('id', 'desc')->get();
         $reviews = Review::where('book_id', $book->id)->with('user')->OrderBy('id', 'desc')->get();
+
+        $book->views += 1;
+        $book->update();
         return view('book.show', compact('book', 'comments', 'reviews'));
     }
 
@@ -158,8 +161,13 @@ class BookController extends Controller
         return view('book.read', compact('book'));
     }
 
-    // public function download(Book $book) {
-    //     return 'download this book: ' . $book->title;
-    // }
+    public function download(Book $book) {
+        $book_download_url = asset('storage/' . $book->book_url);
+
+        $book->downloaded_times += 1;
+        $book->update();
+
+        return redirect()->to($book_download_url);
+    }
 
 }
