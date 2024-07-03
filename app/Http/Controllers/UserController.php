@@ -136,4 +136,44 @@ class UserController extends Controller
     {
         //
     }
+
+    /**
+     * Display settings page
+     */
+    public function settingsView() {
+        $user = Auth::user();
+        $genders = Gender::all();
+        return view('user.settings-view', compact('user', 'genders'));
+    }
+
+    /**
+     * Update user info
+     */
+    public function updateInfo(Request $request) {
+        $user = Auth::user();
+
+        // Validate the incoming request data
+        $validated = $request->validate([
+            'name'              => ['required', 'string', 'min:3', 'max:255'],
+            'username'          => ['required', 'string', 'min:3', 'max:255', 'unique:users,username,' . $user->id],
+            'email'             => ['required', 'email', 'min:3', 'max:255', 'unique:users,email,' . $user->id],
+            'gender_id'         => ['nullable', 'in:1,2,3'],
+            'birth_date'        => ['required', 'date', 'before:2020-01-01', 'after:1990-01-01'],
+            'bio'               => ['nullable', 'string', 'min:5', 'max:5000'],
+            'website'           => ['nullable', 'url', 'max:255'],
+        ]);
+
+        // Set a default value for gender_id if not provided
+        $validated['gender_id'] = $validated['gender_id'] ?? 3;
+
+        // Update the user with the validated data
+        if ($user->update($validated)) {
+            return redirect()->back()->with('success', 'Your info  updated successfully!');
+        }
+
+        // Return an error if the update fails
+        return redirect()->back()->with('error', 'There was an error while trying to update your info, try again later!');
+
+    }
+
 }
