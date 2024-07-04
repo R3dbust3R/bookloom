@@ -15,13 +15,47 @@
     <div class="meta text-muted fs-6">
         Published: {{ $comment->created_at->DiffForHumans() }}
     </div>
+
+    {{-- comment content --}}
     <p class="text-muted m-0">
         {{ $comment->comment }}
     </p>
+    {{-- comment content --}}
+
+    {{-- comment replies --}}
+    @if ($comment->replies)
+        <div class="replies">
+            @foreach ($comment->replies as $reply)
+                <div class="reply p-3 rounded-3 border mt-2">
+                    <p class="text-muted m-0"> 
+                        <a 
+                            href="{{ route('user.show', $reply->user) }}"> 
+                                <img 
+                                    src="{{ asset('storage/' . ($reply->user->profile_image ? $reply->user->profile_image : 'users/default.png')) }}" 
+                                    alt="{{ $reply->user->name }}'s profile image" 
+                                    class="img-thumbnail rounded-circle"
+                                    style="width: 32px;"> 
+                            {{ $reply->user->name }}
+                        </a> 
+                    </p>
+                    <p class="text-muted m-0">{{ $reply->comment }}</p>
+                    @if ($reply->user->id == Auth::id())
+                        <form action="{{ route('comment.destroy', $reply) }}" method="POST" class="d-inline-block">
+                            @csrf @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-danger px-2 rounded-pill">
+                                <i class="fa-solid fa-trash-can"></i> Delete
+                            </button>
+                        </form>
+                    @endif
+                </div>
+            @endforeach
+        </div>
+    @endif
+    {{-- comment replies --}}
 
     {{-- likes / shares / replies --}}
     <div class="user-intractions text-muted fs-5">
-        <span>
+        <span class="d-inline-block m-2">
             <a href="{{ route('comment.like', $comment) }}">
                 {{-- {{ $comment->likedBy }} --}}
                 @if ($comment->likedByUser())
@@ -31,6 +65,13 @@
                 @endif
             </a> 
             {{ $comment->likes->count() }} 
+        </span>
+
+        <span class="d-inline-block m-2">
+            <a href="{{ route('comment.reply', $comment) }}">
+                <i class="fa-solid fa-reply"></i>
+            </a>
+            {{ $comment->replies->count() }}
         </span>
     </div>
     {{-- likes / shares / replies --}}

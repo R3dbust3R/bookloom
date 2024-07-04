@@ -44,6 +44,9 @@ Route::get('/comment/{comment}', [CommentController::class, 'edit'])->name('comm
 Route::put('/comment/{comment}', [CommentController::class, 'update'])->name('comment.update');
 Route::delete('/comment/{comment}', [CommentController::class, 'destroy'])->name('comment.destroy');
 
+Route::get('/comment/reply/{comment}', [CommentController::class, 'reply'])->name('comment.reply');
+Route::post('/comment/reply', [CommentController::class, 'replyStore'])->name('comment.reply-store');
+
 Route::get('/comment/like/{comment}', [CommentLikeController::class, 'like'])->name('comment.like');
 
 

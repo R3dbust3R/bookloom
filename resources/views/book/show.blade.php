@@ -106,7 +106,9 @@
 
             @if ($comments->count() > 0)
                 @foreach ($comments as $comment)
-                    <x-comment-view :is_owner="Auth::id() == $comment->user_id" :comment="$comment"></x-comment-view>
+                    @if (! $comment->parent)
+                        <x-comment-view :is_owner="Auth::id() == $comment->user_id" :comment="$comment"></x-comment-view>
+                    @endif
                 @endforeach
             @else
                 <p class="lead">No comments for this book</p>

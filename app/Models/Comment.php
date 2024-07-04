@@ -14,7 +14,7 @@ class Comment extends Model
     use HasFactory;
 
     protected $fillable = [
-        'comment', 'book_id', 'user_id'
+        'comment', 'book_id', 'user_id', 'parent_id'
     ];
 
 
@@ -36,6 +36,14 @@ class Comment extends Model
 
     public function likes() {
         return $this->hasMany(CommentLike::class);
+    }
+
+    public function replies() {
+        return $this->hasMany(Comment::class, 'parent_id');
+    }
+
+    public function parent() {
+        return $this->belongsTo(Comment::class, 'parent_id');
     }
 
 

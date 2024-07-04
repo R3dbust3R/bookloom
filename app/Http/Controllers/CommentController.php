@@ -43,6 +43,29 @@ class CommentController extends Controller
         }
 
         return redirect()->back()->with('comment_error', 'There was an error while trying to published your comment!');
+    }
+
+    public function reply(Comment $comment) {
+        return view('comment.reply-form', compact('comment'));
+    }
+
+    public function replyStore(Request $request) {
+        $validated = $request->validate([
+            'reply'     => ['required', 'string', 'min:5', 'max:5000'],
+            'book_id'   => ['required', 'integer', 'exists:books,id'],
+            'parent_id' => ['required', 'integer', 'exists:comments,id'],
+        ]);
+        $validated['comment'] = $request->input('reply');
+        $validated['user_id'] = Auth::id();
+        unset( $validated['reply'] );
+
+        $comment = New Comment( $validated );
+
+        if ($comment->save()) {
+            return redirect()->back()->with('comment_success', 'Comment published succssfuly!');
+        }
+
+        return redirect()->back()->with('comment_error', 'There was an error while trying to published your comment!');
 
     }
 
