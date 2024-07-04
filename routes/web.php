@@ -8,6 +8,7 @@ use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\CommentLikeController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -42,6 +43,8 @@ Route::post('/comment', [CommentController::class, 'store'])->name('comment.stor
 Route::get('/comment/{comment}', [CommentController::class, 'edit'])->name('comment.edit');
 Route::put('/comment/{comment}', [CommentController::class, 'update'])->name('comment.update');
 Route::delete('/comment/{comment}', [CommentController::class, 'destroy'])->name('comment.destroy');
+
+Route::get('/comment/like/{comment}', [CommentLikeController::class, 'like'])->name('comment.like');
 
 
 Route::get('/book', [BookController::class, 'index'])->name('book.index');

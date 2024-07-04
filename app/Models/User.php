@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use App\Models\Book;
 use App\Models\Comment;
 use App\Models\Review;
+use App\Models\CommentLike;
 
 
 class User extends Authenticatable
@@ -67,4 +68,9 @@ class User extends Authenticatable
     public function reviews() {
         return $this->hasMany(Review::class);
     }
+
+    public function likedComments() {
+        return $this->belongsTo(Comment::class, 'comment_likes');
+    }
+
 }

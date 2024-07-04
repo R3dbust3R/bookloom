@@ -170,7 +170,7 @@
 {{-- password form --}}
 
 {{-- profile image form --}}
-<section class="container bg-light border rounded-4 p-4 mb-4">
+<section class="container bg-light border rounded-4 p-4 mb-4" id="profile-image-form">
     <h2 class="section-title mb-4">Edit your profile image</h2>
     <form action="{{ route('user.settings.update-image') }}" method="POST" class="" enctype="multipart/form-data">
         @csrf

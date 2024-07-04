@@ -31,7 +31,7 @@
             
             <h4 class="text-capitalize my-2">
                 @if ($user->id == Auth::id())
-                    <a href="{{ route('user.edit') }}" class="btn btn-warning rounded-circle border edit-icon position-absolute"><i class="fa-solid fa-pen"></i></a>
+                    <a href="{{ route('user.settings') }}#profile-image-form" class="btn btn-warning rounded-circle border edit-icon position-absolute"><i class="fa-solid fa-pen"></i></a>
                 @endif
                 {{ $user->name }}
             </h4>

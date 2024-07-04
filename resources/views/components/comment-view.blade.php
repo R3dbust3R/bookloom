@@ -19,6 +19,22 @@
         {{ $comment->comment }}
     </p>
 
+    {{-- likes / shares / replies --}}
+    <div class="user-intractions text-muted fs-5">
+        <span>
+            <a href="{{ route('comment.like', $comment) }}">
+                {{-- {{ $comment->likedBy }} --}}
+                @if ($comment->likedByUser())
+                    <i class="fa-solid fa-thumbs-up"></i>
+                @else
+                    <i class="fa-regular fa-thumbs-up"></i>
+                @endif
+            </a> 
+            {{ $comment->likes->count() }} 
+        </span>
+    </div>
+    {{-- likes / shares / replies --}}
+
     {{-- owner controls --}}
     @auth
         @if ($is_owner)

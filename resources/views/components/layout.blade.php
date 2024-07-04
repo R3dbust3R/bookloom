@@ -67,23 +67,25 @@
 
                 <div class="col-sm-12 col-md-6">
                     <h3><a href="{{ route('home.index') }}" class="text-light">Book<span class="text-warning">Loom</span></a></h3>
-                    <p class="lead">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Harum ipsa aliquam nam?</p>
+                    <p class="fw-light fs-5">
+                        Empowering readers and authors alike, Book<span class="text-warning">Loom</span> is your gateway to a diverse collection of books across genres. Discover, share, and indulge in captivating stories, all in one place.
+                    </p>
                     <p class="copyright fw-light">
-                        Designed & Developed with <i class="fa-solid fa-heart text-warning"></i> by <span class="text-warning">OTMANE TALHAOUI</span> <br>
-                        <a href="{{ route('home.index') }}" class="text-warning">&copy; BookLoom</a> {{ date('Y') }}
+                        Designed & Developed with <i class="fa-solid fa-heart"></i> by OTMANE TALHAOUI <br>
+                        <a href="{{ route('home.index') }}" class="text-light">&copy; BookLoom</a> {{ date('Y') }}
                     </p>
                 </div>
 
                 <div class="col-sm-6 col-md-3">
                     <h4>Quick Links</h4>
                     <ul class="list-unstyled fw-light">
-                        <li><a href="{{ route('home.about') }}" class="text-warning">About us</a></li>
+                        <li><a href="{{ route('home.about') }}" class="text-light">About us</a></li>
                         
                         @auth
-                            <li><a href="{{ route('book.index') }}" class="text-warning">Books</a></li>
-                            <li><a href="{{ route('review.index') }}" class="text-warning">Reviews</a></li>
-                            <li><a href="{{ route('user.profile') }}" class="text-warning">Profile</a></li>
-                            <li><a href="{{ route('user.settings') }}" class="text-warning">Settings</a></li>
+                            <li><a href="{{ route('book.index') }}" class="text-light">Books</a></li>
+                            <li><a href="{{ route('review.index') }}" class="text-light">Reviews</a></li>
+                            <li><a href="{{ route('user.profile') }}" class="text-light">Profile</a></li>
+                            <li><a href="{{ route('user.settings') }}" class="text-light">Settings</a></li>
                         @endauth
                     </ul>
                 </div>
@@ -91,8 +93,8 @@
                 <div class="col-sm-6 col-md-3">
                     <h4>Useful Links</h4>
                     <ul class="list-unstyled fw-light">
-                        <li><a href="{{ route('home.terms-and-conditions') }}" class="text-warning">Terms and conditions</a></li>
-                        <li><a href="{{ route('home.privacy-policy') }}" class="text-warning">Privacy policy</a></li>
+                        <li><a href="{{ route('home.terms-and-conditions') }}" class="text-light">Terms and conditions</a></li>
+                        <li><a href="{{ route('home.privacy-policy') }}" class="text-light">Privacy policy</a></li>
                     </ul>
                 </div>
 
@@ -105,6 +107,7 @@
     <div class="scroll-to-top" id="scroll-to-top"> <i class="fa-solid fa-arrow-turn-up"></i> </div>
     {{-- scroll to top --}}
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/33189c9c9d.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
     <script src="{{ asset('bookloom.js') }}"></script>

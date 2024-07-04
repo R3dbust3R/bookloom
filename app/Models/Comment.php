@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Book;
+use App\Models\CommentLike;
+use Illuminate\Support\Facades\Auth;
 
 class Comment extends Model
 {
@@ -23,4 +25,19 @@ class Comment extends Model
     public function book() {
         return $this->belongsTo(Book::class);
     }
+
+    public function likedBy() {
+        return $this->belongsToMany(User::class, 'comment_likes', 'comment_id', 'user_id')->withTimestamps();
+    }
+
+    public function likedByUser() {
+        return $this->likes()->where('user_id', Auth::id())->exists();
+    }
+
+    public function likes() {
+        return $this->hasMany(CommentLike::class);
+    }
+
+
+
 }

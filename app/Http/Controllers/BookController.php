@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\Comment;
+use App\Models\CommentLike;
 use App\Models\Genre;
 use App\Models\Language;
 use App\Models\Review;
@@ -80,11 +81,12 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        $comments = Comment::where('book_id', $book->id)->with('user')->OrderBy('id', 'desc')->get();
+        $comments = Comment::where('book_id', $book->id)->with(['user', 'likedBy'])->OrderBy('id', 'desc')->get();
         $reviews = Review::where('book_id', $book->id)->with('user')->OrderBy('id', 'desc')->get();
 
         $book->views += 1;
-        $book->update();
+        $book->save();
+
         return view('book.show', compact('book', 'comments', 'reviews'));
     }
 
