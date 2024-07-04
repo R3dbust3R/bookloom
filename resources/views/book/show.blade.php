@@ -6,6 +6,12 @@
     <div class="container">
         <h2 class="section-title text-capitalize mb-4"> {{ $book->title }} </h2>
 
+        {{-- alert --}}
+        @session('success')
+            <div class="alert alert-success"> <i class="fa-solid fa-circle-check"></i> {{ session('success') }} </div>
+        @endsession
+        {{-- alert --}}
+
         <div class="row">
 
             <div class="col-md-6">
@@ -26,7 +32,8 @@
                     <div class="lead text-capitalize"><i class="fa-solid fa-layer-group"></i> <span class="fw-bold">Genre</span> <a href="{{ route('genre.show', $book->genre) }}">{{ $book->genre->name }}</a> </div> 
                     <div class="lead text-capitalize"><i class="fa-solid fa-file"></i> <span class="fw-bold">Pages:</span> {{ $book->page_count }} pages</div> 
                     <div class="lead text-capitalize"><i class="fa-solid fa-eye"></i> <span class="fw-bold">Views:</span> {{ $book->views }} times </div> 
-                    <div class="lead text-capitalize"><i class="fa-solid fa-cloud-arrow-down"></i> <span class="fw-bold">Downloaded:</span> {{ $book->downloaded_times }} times </div> 
+                    <div class="lead text-capitalize"><i class="fa-solid fa-cloud-arrow-down"></i> <span class="fw-bold">Downloads:</span> {{ $book->downloaded_times }} times </div> 
+                    <div class="lead text-capitalize"><i class="fa-solid fa-share"></i> <span class="fw-bold">Shares:</span> {{ $book->sharedBy->count() }} </div>
                     <div class="rating mt-3">
                         <span class="rating fs-4">
                             @for ($i = 0; $i < ceil($book->reviews->avg('rating')); $i++)
@@ -36,18 +43,30 @@
                                 <i class="fa-regular fa-star"></i>
                             @endfor
                         </span>
+                        <span class="text-muted fs-4"> ({{ $book->reviews->count() }}) </span>
                     </div>
                 </div>
                 <hr>
                 <div class="btns bg-light px-5 py-3">
-                    <a href="{{ route('book.read', $book) }}" class="btn btn-primary px-4 rounded-pill"><i class="fa-brands fa-readme"></i> Read book</a>
-                    <a href="{{ route('book.download', $book) }}" class="btn btn-primary px-4 rounded-pill"><i class="fa-solid fa-cloud-arrow-down"></i> Download book</a>
+                    <a href="{{ route('book.read', $book) }}" class="btn btn-primary px-4 rounded-pill"><i class="fa-brands fa-readme"></i> Read</a>
+                    <a href="{{ route('book.download', $book) }}" class="btn btn-primary px-4 rounded-pill"><i class="fa-solid fa-cloud-arrow-down"></i> Download</a>
+                    {{-- share --}}
+                    <a href="{{ route('book.share', $book) }}" class="btn btn-success px-4 rounded-pill">
+                        <i class="fa-solid fa-share"></i> 
+                        @if ($book->isShared())
+                            Unshare
+                        @else
+                            Share
+                        @endif
+                    </a>
+                    {{-- share --}}
                 </div>
+
                 
                 @auth 
                     @if (Auth::user()->id == $book->user_id)
                         <div class="btns bg-light mb-4 px-5 pb-3">
-                            <a href="{{ route('book.edit', $book) }}" class="btn btn-success px-4 rounded-pill"><i class="fa-solid fa-edit"></i> Edit book</a>
+                            <a href="{{ route('book.edit', $book) }}" class="btn btn-success px-4 rounded-pill"><i class="fa-solid fa-edit"></i> Edit</a>
                             <form 
                                 action="{{ route('book.destroy', $book) }}"
                                 method="POST"
@@ -55,7 +74,7 @@
                                 @csrf
                                 @method('DELETE')
                                 
-                                <input type="submit" value="Delete Book" class="btn btn-danger px-4 rounded-pill">
+                                <input type="submit" value="Delete" class="btn btn-danger px-4 rounded-pill">
                             </form>
                         </div>
                     @endif
@@ -77,11 +96,11 @@
 
             {{-- alerts --}}
             @session('comment_success')
-                <div class="alert alert-success"> {{ session('comment_success') }} </div>
+                <div class="alert alert-success"> <i class="fa-solid fa-circle-check"></i> {{ session('comment_success') }} </div>
             @endsession
 
             @session('comment_error')
-                <div class="alert alert-danger"> {{ session('comment_error') }} </div>
+                <div class="alert alert-danger"> <i class="fa-solid fa-triangle-exclamation"></i> {{ session('comment_error') }} </div>
             @endsession
             {{-- alerts --}}
 

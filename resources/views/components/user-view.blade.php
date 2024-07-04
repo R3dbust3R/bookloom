@@ -1,4 +1,4 @@
-@props(['user', 'books'])
+@props(['user', 'books', 'sharedBooks'])
 
 {{-- header --}}
 <header class="profile-header bg-light">
@@ -58,6 +58,44 @@
     </div>
 </section>
 {{-- about --}}
+
+
+
+{{-- shared books --}}
+<section class="shared-books py-5">
+    <div class="container">
+        <h2 class="section-title text-capitalize mb-4"> {{ $user->name }}'s Shares</h2>
+        <div class="row">
+
+            @foreach ($sharedBooks as $sharedBook)
+                <div class="col-md-6 mb-3">
+                    <div class="shared-book p-3 rounded-4 bg-light border">
+                        <div class="row">
+                            <div class="col-4">
+                                <a href="{{ route('book.show', $sharedBook) }}">
+                                    <img class="img-thumbnail w-100 d-block rounded-3" src="{{ asset('storage/' . ($sharedBook->cover ? $sharedBook->cover : 'books/default.png')) }}" alt="{{ $sharedBook->title }}'s cover">
+                                </a>
+                            </div>
+                            <div class="col-8">
+                                <h5> <a href="{{ route('book.show', $sharedBook) }}"> {{ $sharedBook->title }} </a> </h5>
+                                <div class="met">
+                                    <p class="text-muted">
+                                        Published by: <a href="{{ route('user.show', $sharedBook->user) }}"> {{ $sharedBook->user->name }} </a> <br>
+                                        <i class="fa-solid fa-clock"></i> {{ $sharedBook->created_at->DiffForHumans() }}
+                                    </p>
+                                    <p class="text-muted m-0"> {{ Str::words($sharedBook->description, 16) }} </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+
+        </div>
+
+    </div>
+</section>
+{{-- shared books --}}
 
 
 

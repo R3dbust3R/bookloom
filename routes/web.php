@@ -53,6 +53,7 @@ Route::get('/create', [BookController::class, 'create'])->name('book.create');
 Route::post('/store', [BookController::class, 'store'])->name('book.store');
 Route::get('/book/read/{book}', [BookController::class, 'read'])->name('book.read');
 Route::get('/book/download/{book}', [BookController::class, 'download'])->name('book.download');
+Route::get('/book/share/{book}', [BookController::class, 'share'])->name('book.share');
 Route::get('/book/{book}/edit', [BookController::class, 'edit'])->name('book.edit');
 Route::put('/book/{book}/update', [BookController::class, 'update'])->name('book.update');
 Route::delete('/book/{book}', [BookController::class, 'destroy'])->name('book.destroy');

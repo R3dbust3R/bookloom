@@ -9,6 +9,7 @@ use App\Models\Language;
 use App\Models\Genre;
 use App\Models\Comment;
 use App\Models\Review;
+use Illuminate\Support\Facades\Auth;
 
 class Book extends Model
 {
@@ -45,6 +46,14 @@ class Book extends Model
 
     public function reviews() {
         return $this->hasMany(Review::class);
+    }
+
+    public function sharedBy() {
+        return $this->belongsToMany(User::class, 'book_shares');
+    }
+
+    public function isShared() {
+        return $this->sharedBy()->where('user_id', Auth::id())->exists();
     }
 
     

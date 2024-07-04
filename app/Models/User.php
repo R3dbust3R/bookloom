@@ -73,4 +73,9 @@ class User extends Authenticatable
         return $this->belongsTo(Comment::class, 'comment_likes');
     }
 
+    public function sharedBooks() {
+        return $this->belongsToMany(Book::class, 'book_shares');
+    }
+
+
 }

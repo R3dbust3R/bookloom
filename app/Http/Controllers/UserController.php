@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Book;
+use App\Models\BookShare;
 use App\Models\Gender;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,7 +29,9 @@ class UserController extends Controller
                 ->with(['user', 'language', 'genre', 'comments', 'reviews'])
                 ->orderBy('id', 'desc')
                 ->paginate(12);
-        return view('user.profile', compact('books'));
+        // $sharedBooks = BookShare::where('user_id', Auth::id())->get();
+        $sharedBooks = Auth::user()->sharedBooks;
+        return view('user.profile', compact('books', 'sharedBooks'));
     }
 
     /**
@@ -56,7 +59,8 @@ class UserController extends Controller
                 ->with(['user', 'genre', 'language'])
                 ->OrderBy('id', 'desc')
                 ->paginate(12);
-        return view('user.show', compact('user', 'books'));
+        $sharedBooks = $user->sharedBooks;
+        return view('user.show', compact('user', 'books', 'sharedBooks'));
     }
 
     /**

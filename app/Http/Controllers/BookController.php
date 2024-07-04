@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\BookShare;
 use App\Models\Comment;
 use App\Models\CommentLike;
 use App\Models\Genre;
@@ -170,6 +171,29 @@ class BookController extends Controller
         $book->update();
 
         return redirect()->to($book_download_url);
+    }
+
+    public function share(Book $book) {
+
+        if($book->isShared()) {
+            
+            $bookShare = BookShare::where('book_id', $book->id)->where('user_id', Auth::id());
+            $bookShare->delete();
+
+            return redirect()->back()->with('success', 'You have unshared ' . $book->title);
+
+        } 
+
+        $bookShare = New BookShare([ 
+                'book_id' => $book->id, 
+                'user_id' => Auth::id(),
+        ]);
+        $bookShare->save();
+
+
+        return redirect()->back()->with('success', 'You have shared ' . $book->title);
+
+        
     }
 
 }
