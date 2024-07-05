@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Gate;
+
 
 class CommentController extends Controller
 {
@@ -45,11 +48,19 @@ class CommentController extends Controller
         return redirect()->back()->with('comment_error', 'There was an error while trying to published your comment!');
     }
 
-    public function reply(Comment $comment) {
+    /**
+     * Reply to comment form view
+     */
+    public function reply(Comment $comment)
+    {
         return view('comment.reply-form', compact('comment'));
     }
 
-    public function replyStore(Request $request) {
+    /**
+     * Store the reply into the database
+     */
+    public function replyStore(Request $request)
+    {
         $validated = $request->validate([
             'reply'     => ['required', 'string', 'min:5', 'max:5000'],
             'book_id'   => ['required', 'integer', 'exists:books,id'],
@@ -82,6 +93,10 @@ class CommentController extends Controller
      */
     public function edit(Comment $comment)
     {
+        if (! Gate::allows('update-comment', $comment)) {
+            abort(403);
+        }
+
         return view('comment.edit', compact('comment'));
     }
 
@@ -90,6 +105,10 @@ class CommentController extends Controller
      */
     public function update(Request $request, Comment $comment)
     {
+        if (! Gate::allows('update-comment', $comment)) {
+            abort(403);
+        }
+
         $validated = $request->validate([
             'comment' => ['required', 'string', 'min:5', 'max:5000'],
         ]);
@@ -110,6 +129,10 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
+        if (! Gate::allows('update-comment', $comment)) {
+            abort(403);
+        }
+
         if ($comment->delete()) {
             return redirect()->back()->with('comment_success', 'Comment deleted succssfuly!');
         }

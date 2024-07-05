@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class ReviewController extends Controller
 {
@@ -72,6 +73,10 @@ class ReviewController extends Controller
             return redirect()->back()->with('review_success', 'Your review has been published successfuly!');
         }
         
+        if (! Gate::allows('update-review', $review)) {
+            abort(403);
+        }
+
         $review = $review->update($validated);
         
         return redirect()->back()->with('review_success', 'Your review has been published successfuly!');

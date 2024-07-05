@@ -12,6 +12,8 @@ use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Gate;
 
 class BookController extends Controller
 {
@@ -93,6 +95,10 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
+        if (! Gate::allows('update-book', $book)) {
+            abort(403);
+        }
+
         $languages = Language::all();
         $genres = Genre::all();
         return view('book.edit', compact('book', 'languages', 'genres'));
@@ -103,6 +109,10 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book)
     {
+        if (! Gate::allows('update-book', $book)) {
+            abort(403);
+        }
+
         $validated = $request->validate([
             'title'         => ['required', 'string', 'min:3', 'max:255'],
             'description'   => ['required', 'string', 'min:100', 'max:5000'],
@@ -137,6 +147,9 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
+        if (! Gate::allows('update-book', $book)) {
+            abort(403);
+        }
 
         if ($book->delete()) {
 
@@ -153,11 +166,13 @@ class BookController extends Controller
 
     }
 
-    public function read(Book $book) {
+    public function read(Book $book) 
+    {
         return view('book.read', compact('book'));
     }
 
-    public function download(Book $book) {
+    public function download(Book $book) 
+    {
         $book_download_url = asset('storage/' . $book->book_url);
 
         $book->downloaded_times += 1;
@@ -169,7 +184,7 @@ class BookController extends Controller
     public function share(Book $book) {
 
         if($book->isShared()) {
-            
+
             $bookShare = BookShare::where('book_id', $book->id)->where('user_id', Auth::id());
             $bookShare->delete();
 
