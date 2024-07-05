@@ -85,8 +85,8 @@ class UserController extends Controller
             'email'             => ['required', 'email', 'min:3', 'max:255', 'unique:users,email,' . $user->id],
             'old_password'      => ['required', 'string', 'min:5'], // Needed to verify the user
             'password'          => ['nullable', 'string', 'min:5', 'confirmed'],
-            'gender_id'         => ['nullable', 'in:1,2,3'],
-            'birth_date'        => ['required', 'date', 'before:2020-01-01', 'after:1990-01-01'],
+            'gender_id'         => ['required', 'exists:genders,id'],
+            'birth_date'        => ['required', 'date', 'before:2020-01-01', 'after:1920-01-01'],
             'bio'               => ['nullable', 'string', 'min:5', 'max:5000'],
             'profile_image'     => ['nullable', 'image', 'mimes:jpeg,jpg,png,avif,webp', 'max:5120'],
             'profile_banner'    => ['nullable', 'image', 'mimes:jpeg,jpg,png,avif,webp', 'max:5120'],
@@ -161,14 +161,11 @@ class UserController extends Controller
             'name'              => ['required', 'string', 'min:3', 'max:255'],
             'username'          => ['required', 'string', 'min:3', 'max:255', 'unique:users,username,' . $user->id],
             'email'             => ['required', 'email', 'min:3', 'max:255', 'unique:users,email,' . $user->id],
-            'gender_id'         => ['nullable', 'in:1,2,3'],
+            'gender_id'         => ['required', 'exists:genders,id'],
             'birth_date'        => ['required', 'date', 'before:2020-01-01', 'after:1990-01-01'],
             'bio'               => ['nullable', 'string', 'min:5', 'max:5000'],
             'website'           => ['nullable', 'url', 'max:255'],
         ]);
-
-        // Set a default value for gender_id if not provided
-        $validated['gender_id'] = $validated['gender_id'] ?? 3;
 
         // Update the user with the validated data
         if ($user->update($validated)) {

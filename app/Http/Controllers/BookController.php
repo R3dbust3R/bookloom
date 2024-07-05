@@ -45,17 +45,14 @@ class BookController extends Controller
             'title'         => ['required', 'string', 'min:3', 'max:255'],
             'description'   => ['required', 'string', 'min:100', 'max:5000'],
             'author'        => ['required', 'string', 'min:3', 'max:255'],
-            'language_id'   => ['nullable'],
-            'genre_id'      => ['nullable'],
+            'language_id'   => ['required', 'exists:languages,id'],
+            'genre_id'      => ['required', 'exists:genres,id'],
             'page_count'    => ['nullable', 'integer', 'max:20000'],
             'cover'         => ['nullable', 'image', 'mimes:jpeg,jpg,png,avif,webp', 'max:5120'],
             'book_url'      => ['required', 'file', 'mimes:pdf', 'max:20480'],
         ]);
 
         
-        $validated['language_id'] = in_array($request->input('language_id'), [1,2,3]) ? $request->input('language_id') : 2;
-        $validated['genre_id'] = in_array($request->input('genre_id'), [1,2,3,4,5]) ? $request->input('genre_id') : 1;
-
         $validated['user_id'] = Auth::user()->id;
 
         $book_url = $request->file('book_url')->store('books/books', 'public');
@@ -110,15 +107,11 @@ class BookController extends Controller
             'title'         => ['required', 'string', 'min:3', 'max:255'],
             'description'   => ['required', 'string', 'min:100', 'max:5000'],
             'author'        => ['required', 'string', 'min:3', 'max:255'],
-            'language_id'   => ['nullable'],
-            'genre_id'      => ['nullable'],
+            'language_id'   => ['required', 'exists:languages,id'],
+            'genre_id'      => ['required', 'exists:genres,id'],
             'page_count'    => ['nullable', 'integer', 'max:20000'],
             'cover'         => ['nullable', 'image', 'mimes:jpeg,jpg,png,avif,webp', 'max:5120'],
         ]);
-
-        
-        $validated['language_id'] = in_array($request->input('language_id'), [1,2,3]) ? $request->input('language_id') : 2;
-        $validated['genre_id'] = in_array($request->input('genre_id'), [1,2,3,4,5]) ? $request->input('genre_id') : 1;
 
         $validated['user_id'] = $book->user_id;
         $validated['book_url'] = $book->book_url;

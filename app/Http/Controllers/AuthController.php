@@ -22,15 +22,13 @@ class AuthController extends Controller
             'username'          => ['required', 'string', 'min:3', 'max:255', 'unique:users,username'],
             'email'             => ['required', 'email', 'min:3', 'max:255', 'unique:users,email'],
             'password'          => ['required', 'string', 'min:5', 'confirmed'],
-            'gender_id'         => ['nullable'],
-            'birth_date'        => ['required', 'date', 'before:2020-01-01', 'after:1990-01-01'],
+            'gender_id'         => ['required', 'exists:genders,id'],
+            'birth_date'        => ['required', 'date', 'before:2020-01-01', 'after:1920-01-01'],
             'bio'               => ['nullable', 'string', 'min:5', 'max:5000'],
             'profile_image'     => ['nullable', 'image', 'mimes:jpeg,jpg,png,avif,webp', 'max:5120'],
             'profile_banner'    => ['nullable', 'image', 'mimes:jpeg,jpg,png,avif,webp', 'max:5120'],
             'website'           => ['nullable', 'url', 'max:255'],
         ]);
-
-        $validated['gender_id'] = in_array($request->input('gender_id'), [1, 2, 3]) ? $request->input('gender_id') : 3;
 
         $validated['password'] = Hash::make($validated['password']);
 
