@@ -6,7 +6,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Gender;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+
+
 
 class AuthController extends Controller
 {
@@ -45,7 +49,9 @@ class AuthController extends Controller
         $user = User::create($validated);
 
         if ($user->save()) {
-            return redirect()->route('login.form')->with('success', 'Account has been created successfuly!');
+
+            event(new Registered($user));
+            return redirect()->route('login')->with('success', 'Account has been created successfuly!');
         }
         
         return redirect()->back()->with('error', 'There was an error while trying to create your account, try again later!');
@@ -82,6 +88,31 @@ class AuthController extends Controller
     
         $request->session()->regenerateToken();
     
-        return redirect()->route('login.form');
+        return redirect()->route('login');
     }
+
+
+    /**
+     * Display the verification Notive to the user
+     */
+    public function verificationNotice() {
+        return view('auth.verify-email');
+    }
+
+    /**
+     * Verify the user when click on the links
+     */
+    public function verificationVerify(EmailVerificationRequest $request) {
+        $request->fulfill();
+        return redirect()->route('user.profile')->with('success', 'Welcome to BookLoom, You Email Has Been Verified Successfuly!');
+    }
+
+    /**
+     * Resending the verification Email
+     */
+    public function resendVerificationEmail(Request $request) {
+        $request->user()->sendEmailVerificationNotification();
+        return back()->with('message', 'Verification link sent!');
+    }
+
 }

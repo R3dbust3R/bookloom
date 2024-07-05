@@ -151,7 +151,7 @@
             <div class="form-group">
                 <p class="text-muted">
                     Have an account?
-                    <a href="{{ route('login.form') }}">Login</a>
+                    <a href="{{ route('login') }}">Login</a>
                 </p>
             </div>
 

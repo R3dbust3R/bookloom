@@ -10,9 +10,9 @@ use App\Models\Book;
 use App\Models\Comment;
 use App\Models\Review;
 use App\Models\CommentLike;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable;
 

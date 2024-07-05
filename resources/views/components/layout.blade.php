@@ -36,7 +36,7 @@
                 
                 @guest
                     <li class="nav-item"><a href="{{ route('home.about') }}" class="nav-link mx-2"><i class="fa-solid fa-users"></i> About us</a></li>
-                    <li class="nav-item"><a href="{{ route('login.form') }}" class="nav-link btn bg-white rounded-pill px-4 mx-1"><i class="fa-solid fa-arrow-right-to-bracket"></i> Login</a></li>
+                    <li class="nav-item"><a href="{{ route('login') }}" class="nav-link btn bg-white rounded-pill px-4 mx-1"><i class="fa-solid fa-arrow-right-to-bracket"></i> Login</a></li>
                 @endguest
                 
                 @auth
