@@ -9,11 +9,19 @@ window.onload = function () {
     // searchButton.addEventListener('click', function (e) {searchForm.classList.add('show');});
     // overlayCLose.addEventListener('click', function (e) {searchForm.classList.remove('show');});
 
-    $('#search-btn').click(function () {$('#search-form').addClass('show');});
+    $('#search-btn').click(function () {
+        $('#search-form').addClass('show');
+        $('#search-form form input[type="text"]').focus();
+    });
     $('#overlay-close').click(function () {$('#search-form').removeClass('show');});
     // for search form
     
 
+    // navbar
+    $('#navbar-collapse-trigger').click(function () {
+        $($(this).data('target')).toggleClass('show');
+    })
+    // navbar
 
     // for rating system
     // let reviewRating = document.querySelectorAll('#review-rating i.rating-icon');

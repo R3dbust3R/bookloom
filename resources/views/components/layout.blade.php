@@ -19,35 +19,35 @@
             <div class="logo">
                 <a class="navbar-brand fw-bold" href="{{ route('home.index') }}">Book<span class="text-warning">Loom</span></a>
             </div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
 
-            <div class="navbar-nav">
+            <button class="navbar-collapse-trigger border-0 bg-transparent p-3" id="navbar-collapse-trigger" data-target="#main-navbar">
+                <span class="d-block bg-dark mb-1"></span>
+                <span class="d-block bg-dark mb-1"></span>
+                <span class="d-block bg-dark"></span>
+            </button>
 
-                @auth
-                <li class="nav-item"><a href="{{ route('review.index') }}" class="nav-link"><i class="fa-regular fa-star"></i> Reviews</a></li>
-                <li class="nav-item"><a href="{{ route('book.index') }}" class="nav-link"><i class="fa-solid fa-book"></i> Books</a></li>
-                <li class="nav-item"><button id="search-btn" class="btn bg-white rounded-circle"><i class="fa-solid fa-magnifying-glass"></i></button></li>
-                @endauth
+            <div class="custom-nav-links-collapse" id="main-navbar">
+                <div class="navbar-nav">
+                    @auth
+                    <li class="nav-item"><a href="{{ route('review.index') }}" class="nav-link"><i class="fa-regular fa-star"></i> Reviews</a></li>
+                    <li class="nav-item"><a href="{{ route('book.index') }}" class="nav-link"><i class="fa-solid fa-book"></i> Books</a></li>
+                    <li class="nav-item"><button id="search-btn" class="btn bg-white rounded-circle"><i class="fa-solid fa-magnifying-glass"></i></button></li>
+                    @endauth
 
-                
-                @guest
+
+                    @guest
                     <li class="nav-item"><a href="{{ route('home.about') }}" class="nav-link mx-2"><i class="fa-solid fa-users"></i> About us</a></li>
                     <li class="nav-item"><a href="{{ route('login') }}" class="nav-link btn bg-white rounded-pill px-4 mx-1"><i class="fa-solid fa-arrow-right-to-bracket"></i> Login</a></li>
-                @endguest
-                
-                @auth
+                    @endguest
+
+                    @auth
                     <li class="nav-item"><a href="{{ route('book.create') }}" class="btn bg-white border rounded-pill px-3 mx-1"><i class="fa-regular fa-plus"></i> Upload</a></li>
                     <li class="nav-item"><a href="{{ route('user.profile') }}" class="btn btn-warning rounded-pill px-3 mx-1"><i class="fa-regular fa-user"></i> {{ Auth::user()->name }}</a></li>
                     <li class="nav-item"><a href="{{ route('user.settings') }}" class="btn btn-warning rounded-pill px-3 mx-1"><i class="fa-solid fa-sliders"></i> Settings</a></li>
                     <li class="nav-item"><a href="{{ route('auth.logout') }}" class="nav-link mx-2"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a></li>
-                @endauth
+                    @endauth
+                </div>
             </div>
-
-          </div>
         </div>
     </nav>
     {{-- navbar --}}

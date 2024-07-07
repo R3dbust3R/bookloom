@@ -27,11 +27,11 @@ class HomePageController extends Controller
         $query = $request->input('query');
 
 
-        // $users = User::where('username', 'LIKE', '%' . $query . '%')
-        //     ->orWhere('email', 'LIKE', '%' . $query . '%')
-        //     ->orWhere('name', 'LIKE', '%' . $query . '%')
-        //     ->OrderBy('id', 'desc')
-        //     ->paginate(12);
+        $users = User::where('username', 'LIKE', '%' . $query . '%')
+            ->orWhere('email', 'LIKE', '%' . $query . '%')
+            ->orWhere('name', 'LIKE', '%' . $query . '%')
+            ->OrderBy('id', 'desc')
+            ->paginate(12);
 
         $books = Book::with(['user', 'genre'])
             ->where('title', 'LIKE', '%' . $query . '%')
@@ -39,9 +39,12 @@ class HomePageController extends Controller
             ->OrderBy('id', 'desc')
             ->paginate(12);
 
+        $reviews = Review::where('review', 'LIKE', '%' . $query . '%')
+        ->OrderBy('id', 'desc')
+        ->paginate(12);
 
 
-        return view('home.search', compact('books', 'query'));
+        return view('home.search', compact('users', 'reviews', 'books', 'query'));
     }
 
     public function about() {

@@ -1,6 +1,6 @@
 @props(['book', 'is_owner' => false])
 
-<div class="single-book-container bg-light border rounded-4 overflow-hidden mb-4">
+<div class="single-book-container bg-light border rounded-4 overflow-hidden mb-4 position-relative">
     <a href="{{ route('book.show', $book) }}">
         <img 
         src="{{ asset($book->cover ? 'storage/' . $book->cover : 'storage/books/default.png') }}" 
@@ -8,7 +8,7 @@
         class="w-100">
     </a>
 
-    <div class="footer p-3">
+    <div class="footer p-3 position-absolute left-0 bg-light w-100 border-top border-dark-subtle rounded-top-4">
         <h5 class="text-capitalize">
             <a href="{{ route('book.show', $book) }}">
                 {{ $book->title }}
