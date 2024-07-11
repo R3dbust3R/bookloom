@@ -24,6 +24,8 @@ Route::get('/about', [HomePageController::class, 'about'])->name('home.about');
 Route::get('/privacy-policy', [HomePageController::class, 'privacyPolicy'])->name('home.privacy-policy');
 Route::get('/terms-and-conditions', [HomePageController::class, 'termsAndConditions'])->name('home.terms-and-conditions');
 
+Route::post('/toggle-dark-mode', [UserController::class, 'toggleDarkMode'])->name('user.toggle-dark-mode')->middleware('auth');
+
 Route::get('/user/{user:username}', [UserController::class, 'show'])->name('user.show')->middleware('auth');
 Route::get('/profile', [UserController::class, 'profile'])->name('user.profile')->middleware(['auth', 'verified']);
 Route::get('/edit', [UserController::class, 'edit'])->name('user.edit')->middleware(['auth', 'verified']);

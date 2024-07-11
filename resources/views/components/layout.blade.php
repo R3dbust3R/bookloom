@@ -9,6 +9,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('bookloom-styles.css') }}">
+
+    @if (isset(Auth::user()->settings['dark_mode']) && Auth::user()->settings['dark_mode'])
+        <link rel="stylesheet" href="{{ asset('dark-bookloom-styles.css') }}">
+    @endif
+
     <title>BookLoom</title>
 </head>
 <body>
@@ -34,7 +39,6 @@
                     <li class="nav-item"><button id="search-btn" class="btn bg-white rounded-circle"><i class="fa-solid fa-magnifying-glass"></i></button></li>
                     @endauth
 
-
                     @guest
                     <li class="nav-item"><a href="{{ route('home.about') }}" class="nav-link mx-2"><i class="fa-solid fa-users"></i> About us</a></li>
                     <li class="nav-item"><a href="{{ route('login') }}" class="nav-link btn bg-white rounded-pill px-4 mx-1"><i class="fa-solid fa-arrow-right-to-bracket"></i> Login</a></li>
@@ -46,11 +50,26 @@
                     <li class="nav-item"><a href="{{ route('user.settings') }}" class="btn btn-warning rounded-pill px-3 mx-1"><i class="fa-solid fa-sliders"></i> Settings</a></li>
                     <li class="nav-item"><a href="{{ route('auth.logout') }}" class="nav-link mx-2"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a></li>
                     @endauth
+
+                    <li class="nav-item">
+                        <form action="{{ route('user.toggle-dark-mode') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn bg-white rounded-circle">
+                                @if (isset(Auth::user()->settings['dark_mode']) && Auth::user()->settings['dark_mode'])
+                                    <i class="fa-solid fa-sun"></i>
+                                @else
+                                    <i class="fa-solid fa-moon"></i>
+                                @endif
+                            </button>
+                        </form>
+                    </li>
+
                 </div>
             </div>
         </div>
     </nav>
     {{-- navbar --}}
+
 
     {{-- search form --}}
     <x-search-form></x-search-form>

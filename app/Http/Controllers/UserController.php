@@ -254,6 +254,25 @@ class UserController extends Controller
 
     }
 
+    /**
+     * Toggle the dark mode
+     */
+    public function toggleDarkMode()
+    {
+        $user = Auth::user();
+
+        $settings = $user->settings ?? ['dark_mode' => false];
+
+        $settings['dark_mode'] = !($settings['dark_mode']);
+
+        $user->settings = $settings;
+        $user->save();
+
+        return redirect()->back();
+        
+    }
+    
+    
 
 
 }

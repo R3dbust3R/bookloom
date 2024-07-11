@@ -1,0 +1,49 @@
+$mainColor: #ffc107;
+
+$darkColor: rgb(16, 15, 17);
+$softDarkColor: rgb(35, 34, 35);
+
+$lightColor: white;
+$softLightColor: rgb(229, 229, 229);
+
+body, section, .bg-light, .bg-white,
+input[type=text],
+input[type=password],
+select,
+input[type=date],
+input[type=file],
+input[type=number], 
+textarea {
+    background-color: $darkColor !important;
+    color: $softLightColor !important;
+}
+::placeholder {color: rgba($color: $lightColor, $alpha: .35) !important;}
+.text-muted {
+    color: rgba($color: $lightColor, $alpha: .35) !important;
+}
+
+a {color: $softLightColor !important;}
+.btn {
+    background-color: rgba($color: $softDarkColor, $alpha: .8);
+    border: none !important;
+    &:hover {
+        background-color: $softDarkColor !important;
+    }
+}
+
+.bg-light.border, .border-light, hr, .main-header.border-bottom,
+.bg-white.border, img.img-thumbnail {
+    border-color: $softDarkColor !important;
+}
+
+.bg-dark, img.img-thumbnail, .pagination ul li {
+    .page-link {
+        background-color: rgba($color: $softDarkColor, $alpha: .45) !important;
+        border: none;
+    }
+    
+}
+
+.bg-dark {
+    background-color: rgb(12, 12, 13) !important;
+}

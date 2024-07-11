@@ -1,0 +1,49 @@
+body, section, .bg-light, .bg-white,
+input[type=text],
+input[type=password],
+select,
+input[type=date],
+input[type=file],
+input[type=number],
+textarea {
+  background-color: rgb(16, 15, 17) !important;
+  color: rgb(229, 229, 229) !important;
+}
+
+::-moz-placeholder {
+  color: rgba(255, 255, 255, 0.35) !important;
+}
+
+::placeholder {
+  color: rgba(255, 255, 255, 0.35) !important;
+}
+
+.text-muted {
+  color: rgba(255, 255, 255, 0.35) !important;
+}
+
+a {
+  color: rgb(229, 229, 229) !important;
+}
+
+.btn {
+  background-color: rgba(35, 34, 35, 0.8);
+  border: none !important;
+}
+.btn:hover {
+  background-color: rgb(35, 34, 35) !important;
+}
+
+.bg-light.border, .border-light, hr, .main-header.border-bottom,
+.bg-white.border, img.img-thumbnail {
+  border-color: rgb(35, 34, 35) !important;
+}
+
+.bg-dark .page-link, img.img-thumbnail .page-link, .pagination ul li .page-link {
+  background-color: rgba(35, 34, 35, 0.45) !important;
+  border: none;
+}
+
+.bg-dark {
+  background-color: rgb(12, 12, 13) !important;
+}/*# sourceMappingURL=dark-bookloom-styles.css.map */
